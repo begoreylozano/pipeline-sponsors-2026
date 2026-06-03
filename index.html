@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pipeline de Sponsors 2026</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #F1F5F9; color: #1E293B; font-size: 14px; }
+
+  .header { background: #1B3A6B; color: white; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .header h1 { font-size: 18px; font-weight: 700; letter-spacing: 0.5px; }
+  .header .sub { font-size: 11px; color: #94A3B8; margin-top: 2px; }
+  .updated { font-size: 10px; color: #94A3B8; text-align: right; }
+
+  .container { padding: 20px 24px; max-width: 1100px; margin: 0 auto; }
+
+  /* METRICS */
+  .metrics { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 20px; }
+  .metric { background: white; border-radius: 10px; padding: 14px 12px; text-align: center; border: 1px solid #E2E8F0; }
+  .metric .val { font-size: 28px; font-weight: 800; line-height: 1; }
+  .metric .lbl { font-size: 10px; color: #64748B; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* TRANSVERSAL */
+  .transversal { background: #F0FDF4; border: 1px solid #86EFAC; border-radius: 10px; padding: 10px 16px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 12px; }
+  .transversal strong { color: #1B3A6B; }
+  .tx-chip { background: #1B3A6B; color: white; border-radius: 20px; padding: 3px 10px; font-size: 11px; font-weight: 600; }
+  .tx-sep { color: #94A3B8; }
+
+  /* SECTIONS */
+  .section-title { font-size: 13px; font-weight: 700; color: #1B3A6B; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid #E2E8F0; }
+
+  /* CONVERSATORIOS */
+  .conv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 24px; }
+  .conv-card { background: white; border-radius: 10px; border: 1px solid #E2E8F0; overflow: hidden; }
+  .conv-header { padding: 10px 14px; font-size: 12px; font-weight: 700; color: white; }
+  .conv-body { padding: 10px 14px; }
+  .conv-row { display: flex; align-items: center; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #F1F5F9; }
+  .conv-row:last-child { border-bottom: none; }
+  .conv-name { font-size: 12px; font-weight: 600; color: #1E293B; }
+  .badge { border-radius: 20px; padding: 2px 9px; font-size: 10px; font-weight: 700; white-space: nowrap; }
+  .badge-confirmado { background: #DCFCE7; color: #15803D; }
+  .badge-pendiente  { background: #FEF3C7; color: #B45309; }
+  .badge-cancelado  { background: #FEE2E2; color: #DC2626; }
+  .badge-cerrado    { background: #DCFCE7; color: #15803D; }
+  .badge-en-conv    { background: #DBEAFE; color: #1D4ED8; }
+  .badge-por-conf   { background: #FEF3C7; color: #B45309; }
+  .badge-por-cerrar { background: #EDE9FE; color: #7C3AED; }
+  .badge-reunion    { background: #E0F2FE; color: #0369A1; }
+  .badge-prosp      { background: #F3F4F6; color: #6B7280; }
+
+  /* EVENTS */
+  .events-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 24px; }
+  .event-card { background: white; border-radius: 10px; border: 1px solid #E2E8F0; overflow: hidden; }
+  .event-header { background: #1B3A6B; padding: 10px 14px; }
+  .event-header .ev-title { color: white; font-size: 13px; font-weight: 700; }
+  .event-header .ev-sub   { color: #94A3B8; font-size: 10px; margin-top: 2px; }
+  .event-body { padding: 10px 14px; }
+  .ev-group { margin-bottom: 8px; }
+  .ev-group-label { font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; margin-bottom: 4px; display: inline-block; }
+  .ev-row { display: flex; align-items: center; justify-content: space-between; padding: 4px 6px; margin-bottom: 2px; background: #F8F9FA; border-radius: 6px; }
+  .ev-name { font-size: 11px; font-weight: 600; color: #1E293B; }
+  .ev-right { display: flex; align-items: center; gap: 6px; }
+  .ev-amount { background: #1B3A6B; color: white; border-radius: 4px; padding: 1px 7px; font-size: 10px; font-weight: 700; }
+  .ev-topic { font-size: 10px; color: #64748B; font-style: italic; }
+  .ev-pipeline { background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 6px; padding: 6px 10px; margin-top: 8px; font-size: 10px; color: #1B3A6B; font-style: italic; }
+
+  /* AREQUIPA */
+  .arequipa-card { background: white; border-radius: 10px; border: 1px solid #E2E8F0; overflow: hidden; }
+
+  /* REUNIONES */
+  .meetings-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 24px; }
+  .meeting-card { background: white; border-radius: 10px; border: 1px solid #E2E8F0; padding: 14px 16px; display: flex; align-items: flex-start; gap: 12px; }
+  .meeting-date-box { background: #1B3A6B; color: white; border-radius: 8px; padding: 6px 10px; text-align: center; min-width: 52px; }
+  .meeting-date-box .day { font-size: 22px; font-weight: 800; line-height: 1; }
+  .meeting-date-box .month { font-size: 9px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+  .meeting-date-box.today { background: #DC2626; }
+  .meeting-info .company { font-size: 13px; font-weight: 700; color: #1E293B; }
+  .meeting-info .time { font-size: 11px; color: #64748B; margin-top: 3px; }
+  .meeting-info .note { font-size: 10px; color: #94A3B8; font-style: italic; margin-top: 3px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="header h1">Pipeline de Sponsors 2026</div>
+    <div class="sub">ALTAG — Dashboard de seguimiento</div>
+  </div>
+  <div class="updated">Última actualización<br>Mayo 2026</div>
+</div>
+
+<div class="container">
+
+  <!-- MÉTRICAS -->
+  <div class="metrics">
+    <div class="metric"><div class="val" style="color:#1B3A6B">7</div><div class="lbl">Eventos Activos</div></div>
+    <div class="metric"><div class="val" style="color:#16A34A">4</div><div class="lbl">Deals Cerrados</div></div>
+    <div class="metric"><div class="val" style="color:#0891B2">300+</div><div class="lbl">En Prospección</div></div>
+    <div class="metric"><div class="val" style="color:#D97706">12</div><div class="lbl">Por Confirmar</div></div>
+    <div class="metric"><div class="val" style="color:#7C3AED">3</div><div class="lbl">Por Cerrar</div></div>
+  </div>
+
+  <!-- TRANSVERSAL -->
+  <div class="transversal">
+    <strong>TRANSVERSAL:</strong>
+    <span class="tx-chip">Scotiabank</span>
+    <span class="tx-chip">Pac. Seguros $24.9K · $4.98K/evento</span>
+    <span class="tx-sep">|</span>
+    <strong>ALIANZA:</strong> Perú Retail
+    <span class="tx-sep">|</span>
+    <strong>REUNIONES:</strong> Greenline <span style="color:#15803D;font-weight:700">· Propuesta enviada 27/05 · $24.9K total · $4.98K/evento</span>
+  </div>
+
+  <!-- CONVERSATORIOS DSS -->
+  <div class="section-title">Digital Sales Summit — Conversatorios</div>
+  <div class="conv-grid">
+
+    <div class="conv-card">
+      <div class="conv-header" style="background:#16A34A">Conversatorio Financiero</div>
+      <div class="conv-body">
+        <div class="conv-row"><span class="conv-name">Rextie</span><span class="badge badge-confirmado">Confirmado</span></div>
+        <div class="conv-row"><span class="conv-name">Uge · Virtual Asesores</span><span class="badge badge-confirmado">Confirmado</span></div>
+        <div class="conv-row"><span class="conv-name">Yape</span><span class="badge badge-pendiente">Por confirmar</span></div>
+        <div class="conv-row"><span class="conv-name">KasNet</span><span class="badge badge-pendiente">Por confirmar</span></div>
+        <div class="conv-row"><span class="conv-name">Izipay</span><span class="badge badge-cancelado">Canceló</span></div>
+        <div class="conv-row"><span class="conv-name">Diner Club</span><span class="badge badge-cancelado">Canceló</span></div>
+      </div>
+    </div>
+
+    <div class="conv-card">
+      <div class="conv-header" style="background:#7C3AED">Conversatorio Retos de IA</div>
+      <div class="conv-body">
+        <div class="conv-row"><span class="conv-name">Ramo</span><span class="badge badge-confirmado">Confirmado</span></div>
+        <div class="conv-row"><span class="conv-name">Impulse</span><span class="badge badge-confirmado">Confirmado</span></div>
+        <div class="conv-row"><span class="conv-name">Falabella</span><span class="badge badge-confirmado">Confirmado</span></div>
+        <div class="conv-row"><span class="conv-name">Onleadz</span><span class="badge badge-pendiente">Por confirmar</span></div>
+        <div class="conv-row"><span class="conv-name">Rappi</span><span class="badge badge-pendiente">Por confirmar</span></div>
+        <div class="conv-row"><span class="conv-name">Movistar</span><span class="badge badge-pendiente">Por confirmar</span></div>
+      </div>
+    </div>
+
+    <div class="conv-card">
+      <div class="conv-header" style="background:#0891B2">Conversatorio Estrategia de Canal</div>
+      <div class="conv-body">
+        <div class="conv-row"><span class="conv-name">Capece</span><span class="badge badge-confirmado">Confirmado</span></div>
+        <div class="conv-row"><span class="conv-name">Pac. Seguros</span><span class="badge badge-confirmado">Confirmado</span></div>
+        <div class="conv-row"><span class="conv-name">Aje Group</span><span class="badge badge-confirmado">Confirmado</span></div>
+        <div class="conv-row"><span class="conv-name">Rappi</span><span class="badge badge-pendiente">Por confirmar</span></div>
+        <div class="conv-row"><span class="conv-name">Movistar</span><span class="badge badge-pendiente">Por confirmar</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- EVENTOS -->
+  <div class="section-title">Pipeline por Evento</div>
+  <div class="events-grid">
+
+    <!-- DSS -->
+    <div class="event-card">
+      <div class="event-header">
+        <div class="ev-title">Digital Sales Summit</div>
+      </div>
+      <div class="event-body">
+        <div class="ev-group">
+          <div class="ev-group-label" style="background:#DCFCE7;color:#15803D">Cerrado</div>
+          <div class="ev-row"><span class="ev-name">LaTAM</span><div class="ev-right"><span class="ev-amount">4K</span></div></div>
+          <div class="ev-row"><span class="ev-name">Univ. Pacífico</span><div class="ev-right"><span class="ev-amount">3K</span></div></div>
+          <div class="ev-row"><span class="ev-name">Capece</span><div class="ev-right"><span class="ev-topic">Estrategia de Canal</span></div></div>
+          <div class="ev-row"><span class="ev-name">Pac. Seguros</span><div class="ev-right"><span class="ev-amount">2.5K</span><span class="ev-topic">Estrategia de Canal</span></div></div>
+        </div>
+        <div class="ev-group">
+          <div class="ev-group-label" style="background:#DBEAFE;color:#1D4ED8">En Conversación</div>
+          <div class="ev-row"><span class="ev-name">Yape</span><div class="ev-right"><span class="ev-topic">Conv. Financiero</span></div></div>
+          <div class="ev-row"><span class="ev-name">McCann</span><div class="ev-right"><span class="ev-topic">Estrategia Canal</span></div></div>
+          <div class="ev-row"><span class="ev-name">Natura</span><div class="ev-right"><span class="ev-topic">Historia de éxito</span></div></div>
+          <div class="ev-row"><span class="ev-name">Rextie</span><div class="ev-right"></div></div>
+        </div>
+        <div class="ev-group">
+          <div class="ev-group-label" style="background:#FEF3C7;color:#B45309">Por Confirmar</div>
+          <div class="ev-row"><span class="ev-name">Aje Group</span><div class="ev-right"><span class="ev-amount">2.5K</span><span class="ev-topic">Estrategia Canal · Historia de Éxito</span></div></div>
+          <div class="ev-row"><span class="ev-name">KasNet</span><div class="ev-right"><span class="ev-amount">2.5K</span><span class="ev-topic">Conv. Financiero</span></div></div>
+          <div class="ev-row"><span class="ev-name">Rebaza</span><div class="ev-right"><span class="ev-amount">2.5K</span><span class="ev-topic">Retos IA</span></div></div>
+          <div class="ev-row"><span class="ev-name">Softek</span><div class="ev-right"><span class="ev-amount">3.4K</span><span class="ev-topic">Estrategia Canal</span></div></div>
+          <div class="ev-row"><span class="ev-name">SIP</span><div class="ev-right"><span class="ev-amount">4.5K</span><span class="ev-topic">Conv. Financiero</span></div></div>
+        </div>
+        <div class="ev-group">
+          <div class="ev-group-label" style="background:#E0F2FE;color:#0369A1">Reunión Agendada</div>
+          <div class="ev-row"><span class="ev-name">La Positiva</span><div class="ev-right"><span class="ev-topic">Prospecto NASA</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- XIV CONGRESO -->
+    <div class="event-card">
+      <div class="event-header">
+        <div class="ev-title">XIV Congreso Empresas Familiares</div>
+        <div class="ev-sub">En paralelo con Foro Internacional de IA</div>
+      </div>
+      <div class="event-body">
+        <div class="ev-group">
+          <div class="ev-group-label" style="background:#FEF3C7;color:#B45309">Por Confirmar</div>
+          <div class="ev-row"><span class="ev-name">AEF</span><div class="ev-right"><span class="ev-amount">11.9K</span></div></div>
+          <div class="ev-row"><span class="ev-name">Seidor</span><div class="ev-right"><span class="ev-amount">3.2K</span></div></div>
+          <div class="ev-row"><span class="ev-name">Vinci Compass</span><div class="ev-right"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NASA -->
+    <div class="event-card">
+      <div class="event-header">
+        <div class="ev-title">Innovation by NASA</div>
+      </div>
+      <div class="event-body">
+        <div class="ev-group">
+          <div class="ev-group-label" style="background:#DCFCE7;color:#15803D">Cerrado</div>
+          <div class="ev-row"><span class="ev-name">LaTAM</span><div class="ev-right"><span class="ev-amount">4K</span></div></div>
+        </div>
+        <div class="ev-group">
+          <div class="ev-group-label" style="background:#EDE9FE;color:#7C3AED">Por Cerrar</div>
+          <div class="ev-row"><span class="ev-name">Rimac</span><div class="ev-right"><span class="ev-amount">5.9K</span></div></div>
+          <div class="ev-row"><span class="ev-name">Entel</span><div class="ev-right"><span class="ev-amount">4.5K</span></div></div>
+          <div class="ev-row"><span class="ev-name">Credicorp</span><div class="ev-right"><span class="ev-amount">9.9-14.9K</span></div></div>
+        </div>
+        <div class="ev-group">
+          <div class="ev-group-label" style="background:#FEF3C7;color:#B45309">Por Confirmar</div>
+          <div class="ev-row"><span class="ev-name">CSTI Corp</span><div class="ev-right"><span class="ev-amount">7.9K</span><span class="ev-topic">Propuesta enviada · tb. Foro IA</span></div></div>
+        </div>
+        <div class="ev-group">
+          <div class="ev-group-label" style="background:#F3F4F6;color:#6B7280">En Prospección</div>
+          <div class="ev-row"><span class="ev-name">ESET</span><div class="ev-right"></div></div>
+          <div class="ev-row"><span class="ev-name">Univ. Continental</span><div class="ev-right"></div></div>
+          <div class="ev-row"><span class="ev-name">La Positiva</span><div class="ev-right"><span class="ev-topic">Via DSS</span></div></div>
+        </div>
+        <div class="ev-pipeline">Pipeline cuantificado: LaTAM 4K · Rimac 5.9K · Entel 4.5K · Credicorp 9.9-14.9K · CSTI Corp 7.9K</div>
+      </div>
+    </div>
+
+    <!-- FORO IA -->
+    <div class="event-card">
+      <div class="event-header">
+        <div class="ev-title">Foro Internacional de IA</div>
+        <div class="ev-sub">En paralelo con XIV Congreso de Empresas Familiares</div>
+      </div>
+      <div class="event-body">
+        <div class="ev-group">
+          <div class="ev-group-label" style="background:#DCFCE7;color:#15803D">Cerrado</div>
+          <div class="ev-row"><span class="ev-name">LaTAM</span><div class="ev-right"><span class="ev-amount">4K</span></div></div>
+          <div class="ev-row"><span class="ev-name">Univ. Pacífico</span><div class="ev-right"><span class="ev-amount">3K</span></div></div>
+          <div class="ev-row"><span class="ev-name">PWC</span><div class="ev-right"><span class="ev-amount">3K</span></div></div>
+        </div>
+        <div class="ev-group">
+          <div class="ev-group-label" style="background:#FEF3C7;color:#B45309">Por Confirmar</div>
+          <div class="ev-row"><span class="ev-name">Entel</span><div class="ev-right"><span class="ev-amount">7.9K</span><span class="ev-topic">incl. Coffee</span></div></div>
+          <div class="ev-row"><span class="ev-name">KSE</span><div class="ev-right"></div></div>
+          <div class="ev-row"><span class="ev-name">CSTI Corp</span><div class="ev-right"><span class="ev-amount">7.9K</span><span class="ev-topic">Propuesta enviada · tb. NASA</span></div></div>
+        </div>
+        <div class="ev-group">
+          <div class="ev-group-label" style="background:#E0F2FE;color:#0369A1">Reunión Agendada</div>
+          <div class="ev-row"><span class="ev-name">EpicTravel</span><div class="ev-right"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOR-ME -->
+    <div class="event-card">
+      <div class="event-header">
+        <div class="ev-title">Foro Mujeres Empresarias For-Me</div>
+      </div>
+      <div class="event-body">
+        <div class="ev-group">
+          <div class="ev-group-label" style="background:#DCFCE7;color:#15803D">Cerrado</div>
+          <div class="ev-row"><span class="ev-name">LaTAM</span><div class="ev-right"><span class="ev-amount">4K</span></div></div>
+          <div class="ev-row"><span class="ev-name">Univ. Pacífico</span><div class="ev-right"><span class="ev-amount">3K</span></div></div>
+        </div>
+        <div class="ev-group">
+          <div class="ev-group-label" style="background:#FEF3C7;color:#B45309">Por Confirmar</div>
+          <div class="ev-row"><span class="ev-name">Natura</span><div class="ev-right"><span class="ev-topic">quiere participar, sin $$</span></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PRÓXIMAS REUNIONES -->
+  <div class="section-title">Próximas Reuniones</div>
+  <div class="meetings-grid">
+
+    <div class="meeting-card">
+      <div class="meeting-date-box today">
+        <div class="day">28</div>
+        <div class="month">MAY</div>
+      </div>
+      <div class="meeting-info">
+        <div class="company">Izipay</div>
+        <div class="time">Hoy · 4:30 PM</div>
+        <div class="note">Conversatorio Financiero DSS</div>
+      </div>
+    </div>
+
+    <div class="meeting-card">
+      <div class="meeting-date-box">
+        <div class="day">4</div>
+        <div class="month">JUN</div>
+      </div>
+      <div class="meeting-info">
+        <div class="company">Univ. Continental</div>
+        <div class="time">11:00 AM</div>
+        <div class="note">Prospecto Innovation by NASA</div>
+      </div>
+    </div>
+
+    <div class="meeting-card">
+      <div class="meeting-date-box">
+        <div class="day">4</div>
+        <div class="month">JUN</div>
+      </div>
+      <div class="meeting-info">
+        <div class="company">Vinci Compass</div>
+        <div class="time">4:30 PM</div>
+        <div class="note">Conversatorio Financiero DSS</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- AREQUIPA -->
+  <div class="section-title">Arequipa</div>
+  <div class="arequipa-card" style="margin-bottom:24px">
+    <div class="event-body" style="padding:14px">
+      <div class="ev-group">
+        <div class="ev-group-label" style="background:#FEF3C7;color:#B45309">Por Confirmar</div>
+        <div class="ev-row"><span class="ev-name">UCSP</span><div class="ev-right"><span class="ev-amount">5.9K</span></div></div>
+        <div class="ev-row"><span class="ev-name">Buk</span><div class="ev-right"><span class="ev-amount">3K</span></div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
