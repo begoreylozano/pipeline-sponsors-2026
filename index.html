@@ -3,114 +3,568 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pipeline de Sponsors 2026</title>
+<title>Pipeline de Sponsors 2026 — ALTAG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  :root { color-scheme: light; }
+  :root {
+    --navy:       #1B2B6B;
+    --navy-dark:  #12205A;
+    --navy-light: #2A3F8A;
+    --blue-hero:  #1565C0;
+    --orange:     #E8490F;
+    --orange-lt:  #FFF0EB;
+    --bg:         #EEF2F8;
+    --white:      #FFFFFF;
+    --text:       #1A2340;
+    --muted:      #64748B;
+    --border:     #D8E2F0;
+
+    --green:      #15803D;
+    --green-bg:   #DCFCE7;
+    --yellow:     #B45309;
+    --yellow-bg:  #FEF3C7;
+    --red:        #DC2626;
+    --red-bg:     #FEE2E2;
+    --purple:     #7C3AED;
+    --purple-bg:  #EDE9FE;
+    --blue-st:    #1D4ED8;
+    --blue-bg:    #DBEAFE;
+    --cyan:       #0369A1;
+    --cyan-bg:    #E0F2FE;
+    --gray:       #6B7280;
+    --gray-bg:    #F3F4F6;
+  }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #F1F5F9; color: #1E293B; font-size: 14px; }
 
-  .header { background: #1B3A6B; color: white; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; }
-  .header h1 { font-size: 18px; font-weight: 700; letter-spacing: 0.5px; }
-  .header .sub { font-size: 11px; color: #94A3B8; margin-top: 2px; }
-  .updated { font-size: 10px; color: #94A3B8; text-align: right; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.5;
+  }
 
-  .container { padding: 20px 24px; max-width: 1100px; margin: 0 auto; }
+  /* ── HEADER ─────────────────────────────────────── */
+  .header {
+    background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 50%, var(--blue-hero) 100%);
+    color: white;
+    padding: 0 32px;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    min-height: 72px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; right: 120px;
+    width: 160px; height: 160px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 50%;
+  }
 
-  /* METRICS */
-  .metrics { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 20px; }
-  .metric { background: white; border-radius: 10px; padding: 14px 12px; text-align: center; border: 1px solid #E2E8F0; }
-  .metric .val { font-size: 28px; font-weight: 800; line-height: 1; }
-  .metric .lbl { font-size: 10px; color: #64748B; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 0;
+    z-index: 1;
+  }
 
-  /* TRANSVERSAL */
-  .transversal { background: #F0FDF4; border: 1px solid #86EFAC; border-radius: 10px; padding: 10px 16px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 12px; }
-  .transversal strong { color: #1B3A6B; }
-  .tx-chip { background: #1B3A6B; color: white; border-radius: 20px; padding: 3px 10px; font-size: 11px; font-weight: 600; }
-  .tx-sep { color: #94A3B8; }
+  /* ALTAG logo SVG recreated */
+  .logo-emblem {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+  }
 
-  /* SECTIONS */
-  .section-title { font-size: 13px; font-weight: 700; color: #1B3A6B; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid #E2E8F0; }
+  .header-titles { display: flex; flex-direction: column; gap: 2px; }
+  .header-title {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+    line-height: 1.2;
+  }
+  .header-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
 
-  /* CONVERSATORIOS */
-  .conv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 24px; }
-  .conv-card { background: white; border-radius: 10px; border: 1px solid #E2E8F0; overflow: hidden; }
-  .conv-header { padding: 10px 14px; font-size: 12px; font-weight: 700; color: white; }
-  .conv-body { padding: 10px 14px; }
-  .conv-row { display: flex; align-items: center; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #F1F5F9; }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 1;
+  }
+  .header-meta {
+    text-align: right;
+  }
+  .header-meta .label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+  .header-meta .value {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    margin-top: 2px;
+  }
+  .header-pill {
+    background: var(--orange);
+    color: white;
+    border-radius: 50px;
+    padding: 8px 18px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+
+  /* ── CONTAINER ───────────────────────────────────── */
+  .container {
+    padding: 28px 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ── METRICS ─────────────────────────────────────── */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .metric {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 20px 16px;
+    text-align: center;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .metric:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(27,43,107,0.10);
+  }
+  .metric::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 16px 16px 0 0;
+  }
+  .metric:nth-child(1)::before { background: var(--navy); }
+  .metric:nth-child(2)::before { background: var(--green); }
+  .metric:nth-child(3)::before { background: var(--blue-st); }
+  .metric:nth-child(4)::before { background: var(--yellow); }
+  .metric:nth-child(5)::before { background: var(--purple); }
+  .metric .val {
+    font-size: 34px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .metric .lbl {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 600;
+  }
+
+  /* ── TRANSVERSAL BANNER ──────────────────────────── */
+  .transversal {
+    background: linear-gradient(135deg, #F0FDF4 0%, #EFF6FF 100%);
+    border: 1px solid #86EFAC;
+    border-radius: 14px;
+    padding: 14px 20px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 12px;
+  }
+  .transversal .block-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .tx-chip {
+    background: var(--navy);
+    color: white;
+    border-radius: 50px;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .tx-chip.orange { background: var(--orange); }
+  .tx-sep { color: var(--border); font-size: 18px; font-weight: 300; }
+  .tx-green { color: var(--green); font-weight: 700; font-size: 12px; }
+
+  /* ── SECTION TITLE ───────────────────────────────── */
+  .section-title {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 16px;
+    background: var(--orange);
+    border-radius: 4px;
+  }
+
+  /* ── CONVERSATORIOS ──────────────────────────────── */
+  .conv-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .conv-card {
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(27,43,107,0.06);
+  }
+  .conv-header {
+    padding: 12px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .conv-header::before {
+    content: '●';
+    font-size: 8px;
+    opacity: 0.7;
+  }
+  .conv-body { padding: 8px 14px 12px; }
+  .conv-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 0;
+    border-bottom: 1px solid #F1F5F9;
+  }
   .conv-row:last-child { border-bottom: none; }
-  .conv-name { font-size: 12px; font-weight: 600; color: #1E293B; }
-  .badge { border-radius: 20px; padding: 2px 9px; font-size: 10px; font-weight: 700; white-space: nowrap; }
-  .badge-confirmado { background: #DCFCE7; color: #15803D; }
-  .badge-pendiente  { background: #FEF3C7; color: #B45309; }
-  .badge-cancelado  { background: #FEE2E2; color: #DC2626; }
-  .badge-cerrado    { background: #DCFCE7; color: #15803D; }
-  .badge-en-conv    { background: #DBEAFE; color: #1D4ED8; }
-  .badge-por-conf   { background: #FEF3C7; color: #B45309; }
-  .badge-por-cerrar { background: #EDE9FE; color: #7C3AED; }
-  .badge-reunion    { background: #E0F2FE; color: #0369A1; }
-  .badge-prosp      { background: #F3F4F6; color: #6B7280; }
+  .conv-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+  }
 
-  /* EVENTS */
-  .events-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 24px; }
-  .event-card { background: white; border-radius: 10px; border: 1px solid #E2E8F0; overflow: hidden; }
-  .event-header { background: #1B3A6B; padding: 10px 14px; }
-  .event-header .ev-title { color: white; font-size: 13px; font-weight: 700; }
-  .event-header .ev-sub   { color: #94A3B8; font-size: 10px; margin-top: 2px; }
-  .event-body { padding: 10px 14px; }
-  .ev-group { margin-bottom: 8px; }
-  .ev-group-label { font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; margin-bottom: 4px; display: inline-block; }
-  .ev-row { display: flex; align-items: center; justify-content: space-between; padding: 4px 6px; margin-bottom: 2px; background: #F8F9FA; border-radius: 6px; }
-  .ev-name { font-size: 11px; font-weight: 600; color: #1E293B; }
+  /* ── BADGES ──────────────────────────────────────── */
+  .badge {
+    border-radius: 50px;
+    padding: 3px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+    letter-spacing: 0.2px;
+  }
+  .b-confirmado { background: var(--green-bg);  color: var(--green); }
+  .b-pendiente  { background: var(--yellow-bg); color: var(--yellow); }
+  .b-cancelado  { background: var(--red-bg);    color: var(--red); }
+  .b-cerrado    { background: var(--green-bg);  color: var(--green); }
+  .b-conv       { background: var(--blue-bg);   color: var(--blue-st); }
+  .b-porcerrar  { background: var(--purple-bg); color: var(--purple); }
+  .b-reunion    { background: var(--cyan-bg);   color: var(--cyan); }
+  .b-prosp      { background: var(--gray-bg);   color: var(--gray); }
+
+  /* ── EVENTS GRID ─────────────────────────────────── */
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .event-card {
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(27,43,107,0.06);
+  }
+  .event-header {
+    background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+    padding: 14px 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .event-header::after {
+    content: '';
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 80px; height: 80px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+  .ev-title {
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+  }
+  .ev-sub {
+    color: rgba(255,255,255,0.55);
+    font-size: 10px;
+    margin-top: 3px;
+    position: relative;
+    z-index: 1;
+  }
+  .event-body { padding: 12px 16px; }
+  .ev-group { margin-bottom: 10px; }
+  .ev-group:last-child { margin-bottom: 0; }
+
+  .ev-group-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 50px;
+    margin-bottom: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .ev-group-label::before { content: '▶'; font-size: 6px; }
+
+  .ev-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 8px;
+    margin-bottom: 3px;
+    background: #F8FAFD;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: border-color 0.15s;
+  }
+  .ev-row:hover { border-color: var(--border); }
+  .ev-name { font-size: 11px; font-weight: 600; color: var(--text); }
   .ev-right { display: flex; align-items: center; gap: 6px; }
-  .ev-amount { background: #1B3A6B; color: white; border-radius: 4px; padding: 1px 7px; font-size: 10px; font-weight: 700; }
-  .ev-topic { font-size: 10px; color: #64748B; font-style: italic; }
-  .ev-pipeline { background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 6px; padding: 6px 10px; margin-top: 8px; font-size: 10px; color: #1B3A6B; font-style: italic; }
+  .ev-amount {
+    background: var(--navy);
+    color: white;
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .ev-topic {
+    font-size: 10px;
+    color: var(--muted);
+    font-style: italic;
+  }
+  .ev-pipeline {
+    background: linear-gradient(135deg, #EFF6FF, #EEF2F8);
+    border: 1px solid #BFDBFE;
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin-top: 8px;
+    font-size: 10px;
+    color: var(--navy);
+    font-weight: 500;
+    line-height: 1.6;
+  }
+  .ev-pipeline strong { font-weight: 700; color: var(--orange); }
 
-  /* AREQUIPA */
-  .arequipa-card { background: white; border-radius: 10px; border: 1px solid #E2E8F0; overflow: hidden; }
+  /* ── MEETINGS ────────────────────────────────────── */
+  .meetings-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .meeting-card {
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    padding: 16px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    box-shadow: 0 2px 8px rgba(27,43,107,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .meeting-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(27,43,107,0.10);
+  }
+  .meeting-date-box {
+    background: var(--navy);
+    color: white;
+    border-radius: 12px;
+    padding: 8px 12px;
+    text-align: center;
+    min-width: 56px;
+    flex-shrink: 0;
+  }
+  .meeting-date-box.today { background: var(--orange); }
+  .meeting-date-box .day { font-size: 26px; font-weight: 900; line-height: 1; }
+  .meeting-date-box .month {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 2px;
+    opacity: 0.8;
+  }
+  .meeting-info .company { font-size: 14px; font-weight: 700; color: var(--text); }
+  .meeting-info .time { font-size: 11px; color: var(--muted); margin-top: 4px; font-weight: 500; }
+  .meeting-info .note {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 4px;
+    font-style: italic;
+    background: var(--bg);
+    border-radius: 6px;
+    padding: 3px 8px;
+    display: inline-block;
+  }
 
-  /* REUNIONES */
-  .meetings-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 24px; }
-  .meeting-card { background: white; border-radius: 10px; border: 1px solid #E2E8F0; padding: 14px 16px; display: flex; align-items: flex-start; gap: 12px; }
-  .meeting-date-box { background: #1B3A6B; color: white; border-radius: 8px; padding: 6px 10px; text-align: center; min-width: 52px; }
-  .meeting-date-box .day { font-size: 22px; font-weight: 800; line-height: 1; }
-  .meeting-date-box .month { font-size: 9px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
-  .meeting-date-box.today { background: #DC2626; }
-  .meeting-info .company { font-size: 13px; font-weight: 700; color: #1E293B; }
-  .meeting-info .time { font-size: 11px; color: #64748B; margin-top: 3px; }
-  .meeting-info .note { font-size: 10px; color: #94A3B8; font-style: italic; margin-top: 3px; }
+  /* ── AREQUIPA ────────────────────────────────────── */
+  .arequipa-card {
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 8px rgba(27,43,107,0.06);
+  }
+  .arequipa-header {
+    background: linear-gradient(135deg, #4F1D96 0%, #7C3AED 100%);
+    padding: 12px 18px;
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .arequipa-header::before { content: '📍'; font-size: 14px; }
+
+  /* ── FOOTER ──────────────────────────────────────── */
+  .footer {
+    background: var(--navy-dark);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 18px 32px;
+    font-size: 11px;
+  }
+  .footer span { color: rgba(255,255,255,0.7); font-weight: 600; }
 </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <div class="header">
-  <div>
-    <div class="header h1">Pipeline de Sponsors 2026</div>
-    <div class="sub">ALTAG — Dashboard de seguimiento</div>
+  <div class="header-left">
+    <!-- ALTAG Logo SVG recreado -->
+    <svg class="logo-emblem" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="22" cy="22" r="21" fill="white" fill-opacity="0.12" stroke="white" stroke-opacity="0.3" stroke-width="1.5"/>
+      <circle cx="22" cy="22" r="16" fill="white" fill-opacity="0.08"/>
+      <!-- Wheat/leaf motif -->
+      <path d="M22 32 L22 14" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M22 26 Q18 22 16 18" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      <path d="M22 26 Q26 22 28 18" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      <path d="M22 22 Q18 18 17 14" stroke="white" stroke-width="1.3" stroke-linecap="round" fill="none" opacity="0.7"/>
+      <path d="M22 22 Q26 18 27 14" stroke="white" stroke-width="1.3" stroke-linecap="round" fill="none" opacity="0.7"/>
+      <path d="M22 18 Q20 15 20 13" stroke="white" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.5"/>
+      <path d="M22 18 Q24 15 24 13" stroke="white" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.5"/>
+    </svg>
+    <div class="header-titles">
+      <div class="header-title">Pipeline de Sponsors 2026</div>
+      <div class="header-sub">ALTAG — Dashboard de seguimiento comercial</div>
+    </div>
   </div>
-  <div class="updated">Última actualización<br>Mayo 2026</div>
+  <div class="header-right">
+    <div class="header-meta">
+      <div class="label">Última actualización</div>
+      <div class="value">Mayo 2026</div>
+    </div>
+    <div class="header-pill">Activo</div>
+  </div>
 </div>
 
 <div class="container">
 
   <!-- MÉTRICAS -->
   <div class="metrics">
-    <div class="metric"><div class="val" style="color:#1B3A6B">7</div><div class="lbl">Eventos Activos</div></div>
-    <div class="metric"><div class="val" style="color:#16A34A">4</div><div class="lbl">Deals Cerrados</div></div>
-    <div class="metric"><div class="val" style="color:#0891B2">300+</div><div class="lbl">En Prospección</div></div>
-    <div class="metric"><div class="val" style="color:#D97706">12</div><div class="lbl">Por Confirmar</div></div>
-    <div class="metric"><div class="val" style="color:#7C3AED">3</div><div class="lbl">Por Cerrar</div></div>
+    <div class="metric">
+      <div class="val" style="color:var(--navy)">7</div>
+      <div class="lbl">Eventos Activos</div>
+    </div>
+    <div class="metric">
+      <div class="val" style="color:var(--green)">4</div>
+      <div class="lbl">Deals Cerrados</div>
+    </div>
+    <div class="metric">
+      <div class="val" style="color:var(--blue-st)">300+</div>
+      <div class="lbl">En Prospección</div>
+    </div>
+    <div class="metric">
+      <div class="val" style="color:var(--yellow)">12</div>
+      <div class="lbl">Por Confirmar</div>
+    </div>
+    <div class="metric">
+      <div class="val" style="color:var(--purple)">3</div>
+      <div class="lbl">Por Cerrar</div>
+    </div>
   </div>
 
-  <!-- TRANSVERSAL -->
+  <!-- TRANSVERSAL BANNER -->
   <div class="transversal">
-    <strong>TRANSVERSAL:</strong>
+    <span class="block-label">Transversal</span>
     <span class="tx-chip">Scotiabank</span>
-    <span class="tx-chip">Pac. Seguros $24.9K · $4.98K/evento</span>
+    <span class="tx-chip">Pac. Seguros · $24.9K total · $4.98K/evento</span>
     <span class="tx-sep">|</span>
-    <strong>ALIANZA:</strong> Perú Retail
+    <span class="block-label">Alianza</span>
+    <span class="tx-chip" style="background:#0891B2">Perú Retail</span>
     <span class="tx-sep">|</span>
-    <strong>REUNIONES:</strong> Greenline <span style="color:#15803D;font-weight:700">· Propuesta enviada 27/05 · $24.9K total · $4.98K/evento</span>
+    <span class="block-label">En reunión</span>
+    <span class="tx-chip orange">Greenline</span>
+    <span class="tx-green">Propuesta enviada 27/05 · $24.9K total · $4.98K/evento</span>
   </div>
 
   <!-- CONVERSATORIOS DSS -->
@@ -118,43 +572,43 @@
   <div class="conv-grid">
 
     <div class="conv-card">
-      <div class="conv-header" style="background:#16A34A">Conversatorio Financiero</div>
+      <div class="conv-header" style="background:linear-gradient(135deg,#15803D,#16A34A)">Conversatorio Financiero</div>
       <div class="conv-body">
-        <div class="conv-row"><span class="conv-name">Rextie</span><span class="badge badge-confirmado">Confirmado</span></div>
-        <div class="conv-row"><span class="conv-name">Uge · Virtual Asesores</span><span class="badge badge-confirmado">Confirmado</span></div>
-        <div class="conv-row"><span class="conv-name">Yape</span><span class="badge badge-pendiente">Por confirmar</span></div>
-        <div class="conv-row"><span class="conv-name">KasNet</span><span class="badge badge-pendiente">Por confirmar</span></div>
-        <div class="conv-row"><span class="conv-name">Izipay</span><span class="badge badge-cancelado">Canceló</span></div>
-        <div class="conv-row"><span class="conv-name">Diner Club</span><span class="badge badge-cancelado">Canceló</span></div>
+        <div class="conv-row"><span class="conv-name">Rextie</span><span class="badge b-confirmado">Confirmado</span></div>
+        <div class="conv-row"><span class="conv-name">Uge · Virtual Asesores</span><span class="badge b-confirmado">Confirmado</span></div>
+        <div class="conv-row"><span class="conv-name">Yape</span><span class="badge b-pendiente">Por confirmar</span></div>
+        <div class="conv-row"><span class="conv-name">KasNet</span><span class="badge b-pendiente">Por confirmar</span></div>
+        <div class="conv-row"><span class="conv-name">Izipay</span><span class="badge b-cancelado">Canceló</span></div>
+        <div class="conv-row"><span class="conv-name">Diner Club</span><span class="badge b-cancelado">Canceló</span></div>
       </div>
     </div>
 
     <div class="conv-card">
-      <div class="conv-header" style="background:#7C3AED">Conversatorio Retos de IA</div>
+      <div class="conv-header" style="background:linear-gradient(135deg,#6D28D9,#7C3AED)">Conversatorio Retos de IA</div>
       <div class="conv-body">
-        <div class="conv-row"><span class="conv-name">Ramo</span><span class="badge badge-confirmado">Confirmado</span></div>
-        <div class="conv-row"><span class="conv-name">Impulse</span><span class="badge badge-confirmado">Confirmado</span></div>
-        <div class="conv-row"><span class="conv-name">Falabella</span><span class="badge badge-confirmado">Confirmado</span></div>
-        <div class="conv-row"><span class="conv-name">Onleadz</span><span class="badge badge-pendiente">Por confirmar</span></div>
-        <div class="conv-row"><span class="conv-name">Rappi</span><span class="badge badge-pendiente">Por confirmar</span></div>
-        <div class="conv-row"><span class="conv-name">Movistar</span><span class="badge badge-pendiente">Por confirmar</span></div>
+        <div class="conv-row"><span class="conv-name">Ramo</span><span class="badge b-confirmado">Confirmado</span></div>
+        <div class="conv-row"><span class="conv-name">Impulse</span><span class="badge b-confirmado">Confirmado</span></div>
+        <div class="conv-row"><span class="conv-name">Falabella</span><span class="badge b-confirmado">Confirmado</span></div>
+        <div class="conv-row"><span class="conv-name">Onleadz</span><span class="badge b-pendiente">Por confirmar</span></div>
+        <div class="conv-row"><span class="conv-name">Rappi</span><span class="badge b-pendiente">Por confirmar</span></div>
+        <div class="conv-row"><span class="conv-name">Movistar</span><span class="badge b-pendiente">Por confirmar</span></div>
       </div>
     </div>
 
     <div class="conv-card">
-      <div class="conv-header" style="background:#0891B2">Conversatorio Estrategia de Canal</div>
+      <div class="conv-header" style="background:linear-gradient(135deg,#0369A1,#0891B2)">Conversatorio Estrategia de Canal</div>
       <div class="conv-body">
-        <div class="conv-row"><span class="conv-name">Capece</span><span class="badge badge-confirmado">Confirmado</span></div>
-        <div class="conv-row"><span class="conv-name">Pac. Seguros</span><span class="badge badge-confirmado">Confirmado</span></div>
-        <div class="conv-row"><span class="conv-name">Aje Group</span><span class="badge badge-confirmado">Confirmado</span></div>
-        <div class="conv-row"><span class="conv-name">Rappi</span><span class="badge badge-pendiente">Por confirmar</span></div>
-        <div class="conv-row"><span class="conv-name">Movistar</span><span class="badge badge-pendiente">Por confirmar</span></div>
+        <div class="conv-row"><span class="conv-name">Capece</span><span class="badge b-confirmado">Confirmado</span></div>
+        <div class="conv-row"><span class="conv-name">Pac. Seguros</span><span class="badge b-confirmado">Confirmado</span></div>
+        <div class="conv-row"><span class="conv-name">Aje Group</span><span class="badge b-confirmado">Confirmado</span></div>
+        <div class="conv-row"><span class="conv-name">Rappi</span><span class="badge b-pendiente">Por confirmar</span></div>
+        <div class="conv-row"><span class="conv-name">Movistar</span><span class="badge b-pendiente">Por confirmar</span></div>
       </div>
     </div>
 
   </div>
 
-  <!-- EVENTOS -->
+  <!-- PIPELINE POR EVENTO -->
   <div class="section-title">Pipeline por Evento</div>
   <div class="events-grid">
 
@@ -165,29 +619,29 @@
       </div>
       <div class="event-body">
         <div class="ev-group">
-          <div class="ev-group-label" style="background:#DCFCE7;color:#15803D">Cerrado</div>
-          <div class="ev-row"><span class="ev-name">LaTAM</span><div class="ev-right"><span class="ev-amount">4K</span></div></div>
-          <div class="ev-row"><span class="ev-name">Univ. Pacífico</span><div class="ev-right"><span class="ev-amount">3K</span></div></div>
+          <div class="ev-group-label" style="background:var(--green-bg);color:var(--green)">Cerrado</div>
+          <div class="ev-row"><span class="ev-name">LaTAM</span><div class="ev-right"><span class="ev-amount">$4K</span></div></div>
+          <div class="ev-row"><span class="ev-name">Univ. Pacífico</span><div class="ev-right"><span class="ev-amount">$3K</span></div></div>
           <div class="ev-row"><span class="ev-name">Capece</span><div class="ev-right"><span class="ev-topic">Estrategia de Canal</span></div></div>
-          <div class="ev-row"><span class="ev-name">Pac. Seguros</span><div class="ev-right"><span class="ev-amount">2.5K</span><span class="ev-topic">Estrategia de Canal</span></div></div>
+          <div class="ev-row"><span class="ev-name">Pac. Seguros</span><div class="ev-right"><span class="ev-amount">$2.5K</span><span class="ev-topic">Estrategia Canal</span></div></div>
         </div>
         <div class="ev-group">
-          <div class="ev-group-label" style="background:#DBEAFE;color:#1D4ED8">En Conversación</div>
+          <div class="ev-group-label" style="background:var(--blue-bg);color:var(--blue-st)">En Conversación</div>
           <div class="ev-row"><span class="ev-name">Yape</span><div class="ev-right"><span class="ev-topic">Conv. Financiero</span></div></div>
           <div class="ev-row"><span class="ev-name">McCann</span><div class="ev-right"><span class="ev-topic">Estrategia Canal</span></div></div>
           <div class="ev-row"><span class="ev-name">Natura</span><div class="ev-right"><span class="ev-topic">Historia de éxito</span></div></div>
           <div class="ev-row"><span class="ev-name">Rextie</span><div class="ev-right"></div></div>
         </div>
         <div class="ev-group">
-          <div class="ev-group-label" style="background:#FEF3C7;color:#B45309">Por Confirmar</div>
-          <div class="ev-row"><span class="ev-name">Aje Group</span><div class="ev-right"><span class="ev-amount">2.5K</span><span class="ev-topic">Estrategia Canal · Historia de Éxito</span></div></div>
-          <div class="ev-row"><span class="ev-name">KasNet</span><div class="ev-right"><span class="ev-amount">2.5K</span><span class="ev-topic">Conv. Financiero</span></div></div>
-          <div class="ev-row"><span class="ev-name">Rebaza</span><div class="ev-right"><span class="ev-amount">2.5K</span><span class="ev-topic">Retos IA</span></div></div>
-          <div class="ev-row"><span class="ev-name">Softek</span><div class="ev-right"><span class="ev-amount">3.4K</span><span class="ev-topic">Estrategia Canal</span></div></div>
-          <div class="ev-row"><span class="ev-name">SIP</span><div class="ev-right"><span class="ev-amount">4.5K</span><span class="ev-topic">Conv. Financiero</span></div></div>
+          <div class="ev-group-label" style="background:var(--yellow-bg);color:var(--yellow)">Por Confirmar</div>
+          <div class="ev-row"><span class="ev-name">Aje Group</span><div class="ev-right"><span class="ev-amount">$2.5K</span><span class="ev-topic">Estrategia · Historia Éxito</span></div></div>
+          <div class="ev-row"><span class="ev-name">KasNet</span><div class="ev-right"><span class="ev-amount">$2.5K</span><span class="ev-topic">Conv. Financiero</span></div></div>
+          <div class="ev-row"><span class="ev-name">Rebaza</span><div class="ev-right"><span class="ev-amount">$2.5K</span><span class="ev-topic">Retos IA</span></div></div>
+          <div class="ev-row"><span class="ev-name">Softek</span><div class="ev-right"><span class="ev-amount">$3.4K</span><span class="ev-topic">Estrategia Canal</span></div></div>
+          <div class="ev-row"><span class="ev-name">SIP</span><div class="ev-right"><span class="ev-amount">$4.5K</span><span class="ev-topic">Conv. Financiero</span></div></div>
         </div>
         <div class="ev-group">
-          <div class="ev-group-label" style="background:#E0F2FE;color:#0369A1">Reunión Agendada</div>
+          <div class="ev-group-label" style="background:var(--cyan-bg);color:var(--cyan)">Reunión Agendada</div>
           <div class="ev-row"><span class="ev-name">La Positiva</span><div class="ev-right"><span class="ev-topic">Prospecto NASA</span></div></div>
         </div>
       </div>
@@ -201,41 +655,43 @@
       </div>
       <div class="event-body">
         <div class="ev-group">
-          <div class="ev-group-label" style="background:#FEF3C7;color:#B45309">Por Confirmar</div>
-          <div class="ev-row"><span class="ev-name">AEF</span><div class="ev-right"><span class="ev-amount">11.9K</span></div></div>
-          <div class="ev-row"><span class="ev-name">Seidor</span><div class="ev-right"><span class="ev-amount">3.2K</span></div></div>
+          <div class="ev-group-label" style="background:var(--yellow-bg);color:var(--yellow)">Por Confirmar</div>
+          <div class="ev-row"><span class="ev-name">AEF</span><div class="ev-right"><span class="ev-amount">$11.9K</span></div></div>
+          <div class="ev-row"><span class="ev-name">Seidor</span><div class="ev-right"><span class="ev-amount">$3.2K</span></div></div>
           <div class="ev-row"><span class="ev-name">Vinci Compass</span><div class="ev-right"></div></div>
         </div>
       </div>
     </div>
 
-    <!-- NASA -->
+    <!-- INNOVATION BY NASA -->
     <div class="event-card">
       <div class="event-header">
         <div class="ev-title">Innovation by NASA</div>
       </div>
       <div class="event-body">
         <div class="ev-group">
-          <div class="ev-group-label" style="background:#DCFCE7;color:#15803D">Cerrado</div>
-          <div class="ev-row"><span class="ev-name">LaTAM</span><div class="ev-right"><span class="ev-amount">4K</span></div></div>
+          <div class="ev-group-label" style="background:var(--green-bg);color:var(--green)">Cerrado</div>
+          <div class="ev-row"><span class="ev-name">LaTAM</span><div class="ev-right"><span class="ev-amount">$4K</span></div></div>
         </div>
         <div class="ev-group">
-          <div class="ev-group-label" style="background:#EDE9FE;color:#7C3AED">Por Cerrar</div>
-          <div class="ev-row"><span class="ev-name">Rimac</span><div class="ev-right"><span class="ev-amount">5.9K</span></div></div>
-          <div class="ev-row"><span class="ev-name">Entel</span><div class="ev-right"><span class="ev-amount">4.5K</span></div></div>
-          <div class="ev-row"><span class="ev-name">Credicorp</span><div class="ev-right"><span class="ev-amount">9.9-14.9K</span></div></div>
+          <div class="ev-group-label" style="background:var(--purple-bg);color:var(--purple)">Por Cerrar</div>
+          <div class="ev-row"><span class="ev-name">Rimac</span><div class="ev-right"><span class="ev-amount">$5.9K</span></div></div>
+          <div class="ev-row"><span class="ev-name">Entel</span><div class="ev-right"><span class="ev-amount">$4.5K</span></div></div>
+          <div class="ev-row"><span class="ev-name">Credicorp</span><div class="ev-right"><span class="ev-amount">$9.9–14.9K</span></div></div>
         </div>
         <div class="ev-group">
-          <div class="ev-group-label" style="background:#FEF3C7;color:#B45309">Por Confirmar</div>
-          <div class="ev-row"><span class="ev-name">CSTI Corp</span><div class="ev-right"><span class="ev-amount">7.9K</span><span class="ev-topic">Propuesta enviada · tb. Foro IA</span></div></div>
+          <div class="ev-group-label" style="background:var(--yellow-bg);color:var(--yellow)">Por Confirmar</div>
+          <div class="ev-row"><span class="ev-name">CSTI Corp</span><div class="ev-right"><span class="ev-amount">$7.9K</span><span class="ev-topic">Prop. enviada · tb. Foro IA</span></div></div>
         </div>
         <div class="ev-group">
-          <div class="ev-group-label" style="background:#F3F4F6;color:#6B7280">En Prospección</div>
+          <div class="ev-group-label" style="background:var(--gray-bg);color:var(--gray)">En Prospección</div>
           <div class="ev-row"><span class="ev-name">ESET</span><div class="ev-right"></div></div>
           <div class="ev-row"><span class="ev-name">Univ. Continental</span><div class="ev-right"></div></div>
-          <div class="ev-row"><span class="ev-name">La Positiva</span><div class="ev-right"><span class="ev-topic">Via DSS</span></div></div>
+          <div class="ev-row"><span class="ev-name">La Positiva</span><div class="ev-right"><span class="ev-topic">Vía DSS</span></div></div>
         </div>
-        <div class="ev-pipeline">Pipeline cuantificado: LaTAM 4K · Rimac 5.9K · Entel 4.5K · Credicorp 9.9-14.9K · CSTI Corp 7.9K</div>
+        <div class="ev-pipeline">
+          <strong>Pipeline cuantificado:</strong> LaTAM $4K · Rimac $5.9K · Entel $4.5K · Credicorp $9.9–14.9K · CSTI Corp $7.9K
+        </div>
       </div>
     </div>
 
@@ -247,19 +703,19 @@
       </div>
       <div class="event-body">
         <div class="ev-group">
-          <div class="ev-group-label" style="background:#DCFCE7;color:#15803D">Cerrado</div>
-          <div class="ev-row"><span class="ev-name">LaTAM</span><div class="ev-right"><span class="ev-amount">4K</span></div></div>
-          <div class="ev-row"><span class="ev-name">Univ. Pacífico</span><div class="ev-right"><span class="ev-amount">3K</span></div></div>
-          <div class="ev-row"><span class="ev-name">PWC</span><div class="ev-right"><span class="ev-amount">3K</span></div></div>
+          <div class="ev-group-label" style="background:var(--green-bg);color:var(--green)">Cerrado</div>
+          <div class="ev-row"><span class="ev-name">LaTAM</span><div class="ev-right"><span class="ev-amount">$4K</span></div></div>
+          <div class="ev-row"><span class="ev-name">Univ. Pacífico</span><div class="ev-right"><span class="ev-amount">$3K</span></div></div>
+          <div class="ev-row"><span class="ev-name">PWC</span><div class="ev-right"><span class="ev-amount">$3K</span></div></div>
         </div>
         <div class="ev-group">
-          <div class="ev-group-label" style="background:#FEF3C7;color:#B45309">Por Confirmar</div>
-          <div class="ev-row"><span class="ev-name">Entel</span><div class="ev-right"><span class="ev-amount">7.9K</span><span class="ev-topic">incl. Coffee</span></div></div>
+          <div class="ev-group-label" style="background:var(--yellow-bg);color:var(--yellow)">Por Confirmar</div>
+          <div class="ev-row"><span class="ev-name">Entel</span><div class="ev-right"><span class="ev-amount">$7.9K</span><span class="ev-topic">incl. Coffee</span></div></div>
           <div class="ev-row"><span class="ev-name">KSE</span><div class="ev-right"></div></div>
-          <div class="ev-row"><span class="ev-name">CSTI Corp</span><div class="ev-right"><span class="ev-amount">7.9K</span><span class="ev-topic">Propuesta enviada · tb. NASA</span></div></div>
+          <div class="ev-row"><span class="ev-name">CSTI Corp</span><div class="ev-right"><span class="ev-amount">$7.9K</span><span class="ev-topic">Prop. enviada · tb. NASA</span></div></div>
         </div>
         <div class="ev-group">
-          <div class="ev-group-label" style="background:#E0F2FE;color:#0369A1">Reunión Agendada</div>
+          <div class="ev-group-label" style="background:var(--cyan-bg);color:var(--cyan)">Reunión Agendada</div>
           <div class="ev-row"><span class="ev-name">EpicTravel</span><div class="ev-right"></div></div>
         </div>
       </div>
@@ -272,13 +728,13 @@
       </div>
       <div class="event-body">
         <div class="ev-group">
-          <div class="ev-group-label" style="background:#DCFCE7;color:#15803D">Cerrado</div>
-          <div class="ev-row"><span class="ev-name">LaTAM</span><div class="ev-right"><span class="ev-amount">4K</span></div></div>
-          <div class="ev-row"><span class="ev-name">Univ. Pacífico</span><div class="ev-right"><span class="ev-amount">3K</span></div></div>
+          <div class="ev-group-label" style="background:var(--green-bg);color:var(--green)">Cerrado</div>
+          <div class="ev-row"><span class="ev-name">LaTAM</span><div class="ev-right"><span class="ev-amount">$4K</span></div></div>
+          <div class="ev-row"><span class="ev-name">Univ. Pacífico</span><div class="ev-right"><span class="ev-amount">$3K</span></div></div>
         </div>
         <div class="ev-group">
-          <div class="ev-group-label" style="background:#FEF3C7;color:#B45309">Por Confirmar</div>
-          <div class="ev-row"><span class="ev-name">Natura</span><div class="ev-right"><span class="ev-topic">quiere participar, sin $$</span></div></div>
+          <div class="ev-group-label" style="background:var(--yellow-bg);color:var(--yellow)">Por Confirmar</div>
+          <div class="ev-row"><span class="ev-name">Natura</span><div class="ev-right"><span class="ev-topic">Quiere participar · sin monto</span></div></div>
         </div>
       </div>
     </div>
@@ -329,16 +785,23 @@
 
   <!-- AREQUIPA -->
   <div class="section-title">Arequipa</div>
-  <div class="arequipa-card" style="margin-bottom:24px">
-    <div class="event-body" style="padding:14px">
+  <div class="arequipa-card">
+    <div class="arequipa-header">Eventos en Arequipa</div>
+    <div class="event-body" style="padding:14px 16px">
       <div class="ev-group">
-        <div class="ev-group-label" style="background:#FEF3C7;color:#B45309">Por Confirmar</div>
-        <div class="ev-row"><span class="ev-name">UCSP</span><div class="ev-right"><span class="ev-amount">5.9K</span></div></div>
-        <div class="ev-row"><span class="ev-name">Buk</span><div class="ev-right"><span class="ev-amount">3K</span></div></div>
+        <div class="ev-group-label" style="background:var(--yellow-bg);color:var(--yellow)">Por Confirmar</div>
+        <div class="ev-row"><span class="ev-name">UCSP</span><div class="ev-right"><span class="ev-amount">$5.9K</span></div></div>
+        <div class="ev-row"><span class="ev-name">Buk</span><div class="ev-right"><span class="ev-amount">$3K</span></div></div>
       </div>
     </div>
   </div>
 
 </div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span>ALTAG</span> · Pipeline de Sponsors 2026 · Uso interno · info@altagperu.com
+</div>
+
 </body>
 </html>
