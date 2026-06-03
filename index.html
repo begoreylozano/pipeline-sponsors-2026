@@ -3,805 +3,1254 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pipeline de Sponsors 2026 — ALTAG</title>
+<title>ALTAG · Sponsor CRM 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy:       #1B2B6B;
-    --navy-dark:  #12205A;
-    --navy-light: #2A3F8A;
-    --blue-hero:  #1565C0;
-    --orange:     #E8490F;
-    --orange-lt:  #FFF0EB;
-    --bg:         #EEF2F8;
-    --white:      #FFFFFF;
-    --text:       #1A2340;
-    --muted:      #64748B;
-    --border:     #D8E2F0;
+/* ═══════════════════════════════════════════
+   VARIABLES & RESET
+═══════════════════════════════════════════ */
+:root {
+  --navy:      #1B2B6B;
+  --navy-d:    #12205A;
+  --navy-l:    #2A3F8A;
+  --blue:      #1565C0;
+  --orange:    #E8490F;
+  --orange-l:  #FFF0EB;
+  --bg:        #EEF2F8;
+  --white:     #FFFFFF;
+  --text:      #1A2340;
+  --muted:     #64748B;
+  --border:    #D8E2F0;
+  --sidebar-w: 220px;
 
-    --green:      #15803D;
-    --green-bg:   #DCFCE7;
-    --yellow:     #B45309;
-    --yellow-bg:  #FEF3C7;
-    --red:        #DC2626;
-    --red-bg:     #FEE2E2;
-    --purple:     #7C3AED;
-    --purple-bg:  #EDE9FE;
-    --blue-st:    #1D4ED8;
-    --blue-bg:    #DBEAFE;
-    --cyan:       #0369A1;
-    --cyan-bg:    #E0F2FE;
-    --gray:       #6B7280;
-    --gray-bg:    #F3F4F6;
-  }
+  --g:  #15803D; --gb: #DCFCE7;
+  --y:  #B45309; --yb: #FEF3C7;
+  --r:  #DC2626; --rb: #FEE2E2;
+  --p:  #7C3AED; --pb: #EDE9FE;
+  --bl: #1D4ED8; --bb: #DBEAFE;
+  --c:  #0369A1; --cb: #E0F2FE;
+  --gr: #6B7280; --grb:#F3F4F6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
+button{cursor:pointer;font-family:inherit}
+a{text-decoration:none;color:inherit}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+/* ═══════════════════════════════════════════
+   LOGIN
+═══════════════════════════════════════════ */
+#login-screen {
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  background: linear-gradient(135deg, var(--navy-d) 0%, var(--navy) 50%, var(--blue) 100%);
+  position:relative;overflow:hidden;
+}
+#login-screen::before{
+  content:'';position:absolute;top:-100px;right:-100px;
+  width:400px;height:400px;background:rgba(255,255,255,0.04);border-radius:50%;
+}
+#login-screen::after{
+  content:'';position:absolute;bottom:-80px;left:-80px;
+  width:300px;height:300px;background:rgba(255,255,255,0.03);border-radius:50%;
+}
+.login-card{
+  background:white;border-radius:24px;padding:48px 44px;width:420px;
+  box-shadow:0 32px 80px rgba(0,0,0,0.25);position:relative;z-index:1;
+}
+.login-logo{display:flex;align-items:center;gap:12px;margin-bottom:32px;justify-content:center}
+.login-logo svg{width:52px;height:52px}
+.login-logo .brand{font-size:22px;font-weight:900;color:var(--navy);letter-spacing:-0.5px}
+.login-logo .brand span{color:var(--orange)}
+.login-title{font-size:20px;font-weight:800;color:var(--text);margin-bottom:6px;text-align:center}
+.login-sub{font-size:13px;color:var(--muted);text-align:center;margin-bottom:32px}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:7px}
+.field input{
+  width:100%;padding:12px 16px;border:1.5px solid var(--border);
+  border-radius:12px;font-size:14px;font-family:inherit;color:var(--text);
+  transition:border-color 0.2s,box-shadow 0.2s;outline:none;background:#FAFBFD;
+}
+.field input:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(27,43,107,0.1)}
+.btn-login{
+  width:100%;padding:14px;background:linear-gradient(135deg,var(--navy),var(--blue));
+  color:white;border:none;border-radius:12px;font-size:15px;font-weight:700;
+  letter-spacing:0.3px;transition:opacity 0.2s,transform 0.1s;margin-top:6px;
+}
+.btn-login:hover{opacity:0.92;transform:translateY(-1px)}
+.btn-login:active{transform:translateY(0)}
+.login-error{
+  background:var(--rb);color:var(--r);border-radius:10px;
+  padding:10px 14px;font-size:12px;font-weight:600;margin-top:14px;
+  display:none;text-align:center;
+}
+.login-footer{text-align:center;margin-top:24px;font-size:11px;color:var(--muted)}
 
-  body {
-    font-family: 'Inter', -apple-system, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 14px;
-    line-height: 1.5;
-  }
+/* ═══════════════════════════════════════════
+   APP SHELL
+═══════════════════════════════════════════ */
+#app{display:none;min-height:100vh;flex-direction:column}
+.topbar{
+  background:linear-gradient(135deg,var(--navy-d) 0%,var(--navy) 60%,var(--blue) 100%);
+  height:60px;display:flex;align-items:center;padding:0 24px;
+  justify-content:space-between;position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 12px rgba(0,0,0,0.2);
+}
+.topbar-left{display:flex;align-items:center;gap:14px}
+.topbar-logo{display:flex;align-items:center;gap:10px}
+.topbar-logo svg{width:34px;height:34px}
+.topbar-logo .brand{font-size:16px;font-weight:900;color:white;letter-spacing:-0.3px}
+.topbar-logo .brand span{color:#F97316}
+.topbar-divider{width:1px;height:28px;background:rgba(255,255,255,0.2);margin:0 4px}
+.nav{display:flex;align-items:center;gap:2px}
+.nav-btn{
+  padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;
+  color:rgba(255,255,255,0.65);border:none;background:transparent;
+  transition:all 0.15s;display:flex;align-items:center;gap:6px;
+}
+.nav-btn:hover{color:white;background:rgba(255,255,255,0.1)}
+.nav-btn.active{color:white;background:rgba(255,255,255,0.18)}
+.nav-btn .icon{font-size:14px}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.user-badge{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.12);border-radius:50px;
+  padding:5px 14px 5px 5px;
+}
+.user-avatar{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--orange);color:white;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;
+}
+.user-name{font-size:12px;font-weight:600;color:rgba(255,255,255,0.9)}
+.btn-logout{
+  padding:5px 12px;border-radius:8px;background:rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.7);border:none;font-size:11px;font-weight:600;
+  transition:all 0.15s;
+}
+.btn-logout:hover{background:rgba(255,255,255,0.18);color:white}
 
-  /* ── HEADER ─────────────────────────────────────── */
-  .header {
-    background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 50%, var(--blue-hero) 100%);
-    color: white;
-    padding: 0 32px;
-    display: flex;
-    align-items: stretch;
-    justify-content: space-between;
-    min-height: 72px;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::before {
-    content: '';
-    position: absolute;
-    top: -40px; right: -40px;
-    width: 200px; height: 200px;
-    background: rgba(255,255,255,0.04);
-    border-radius: 50%;
-  }
-  .header::after {
-    content: '';
-    position: absolute;
-    bottom: -60px; right: 120px;
-    width: 160px; height: 160px;
-    background: rgba(255,255,255,0.03);
-    border-radius: 50%;
-  }
+/* ═══════════════════════════════════════════
+   MAIN CONTENT
+═══════════════════════════════════════════ */
+.main{flex:1;padding:28px 32px;max-width:1300px;margin:0 auto;width:100%}
+.page{display:none}
+.page.active{display:block}
 
-  .header-left {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 16px 0;
-    z-index: 1;
-  }
+/* ═══════════════════════════════════════════
+   SHARED COMPONENTS
+═══════════════════════════════════════════ */
+.section-title{
+  font-size:11px;font-weight:800;color:var(--navy);text-transform:uppercase;
+  letter-spacing:1.5px;margin-bottom:14px;padding-bottom:8px;
+  border-bottom:2px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.section-title-left{display:flex;align-items:center;gap:8px}
+.section-title-left::before{
+  content:'';display:inline-block;width:4px;height:16px;
+  background:var(--orange);border-radius:4px;
+}
+.badge{border-radius:50px;padding:3px 10px;font-size:10px;font-weight:700;white-space:nowrap}
+.b-conf{background:var(--gb);color:var(--g)}
+.b-pend{background:var(--yb);color:var(--y)}
+.b-canc{background:var(--rb);color:var(--r)}
+.b-conv{background:var(--bb);color:var(--bl)}
+.b-cerr{background:var(--pb);color:var(--p)}
+.b-reun{background:var(--cb);color:var(--c)}
+.b-pros{background:var(--grb);color:var(--gr)}
+.b-close{background:var(--gb);color:var(--g)}
+.card{background:white;border-radius:16px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(27,43,107,0.06)}
 
-  /* ALTAG logo SVG recreated */
-  .logo-emblem {
-    width: 44px;
-    height: 44px;
-    flex-shrink: 0;
-  }
+/* ═══════════════════════════════════════════
+   PAGE: DASHBOARD
+═══════════════════════════════════════════ */
+.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:24px}
+.metric{
+  background:white;border-radius:16px;padding:20px 16px;text-align:center;
+  border:1px solid var(--border);position:relative;overflow:hidden;
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+.metric:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(27,43,107,0.10)}
+.metric::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0}
+.metric:nth-child(1)::before{background:var(--navy)}
+.metric:nth-child(2)::before{background:var(--g)}
+.metric:nth-child(3)::before{background:var(--bl)}
+.metric:nth-child(4)::before{background:var(--y)}
+.metric:nth-child(5)::before{background:var(--p)}
+.metric .val{font-size:34px;font-weight:900;line-height:1;margin-bottom:6px}
+.metric .lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;font-weight:600}
 
-  .header-titles { display: flex; flex-direction: column; gap: 2px; }
-  .header-title {
-    font-size: 20px;
-    font-weight: 800;
-    letter-spacing: -0.3px;
-    line-height: 1.2;
-  }
-  .header-sub {
-    font-size: 11px;
-    color: rgba(255,255,255,0.6);
-    font-weight: 500;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-  }
+.transversal{
+  background:linear-gradient(135deg,#F0FDF4,#EFF6FF);border:1px solid #86EFAC;
+  border-radius:14px;padding:14px 20px;margin-bottom:28px;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:12px;
+}
+.block-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.tx-chip{background:var(--navy);color:white;border-radius:50px;padding:4px 12px;font-size:11px;font-weight:700}
+.tx-chip.orange{background:var(--orange)}
+.tx-chip.cyan{background:#0891B2}
+.tx-sep{color:var(--border);font-size:18px;font-weight:300}
+.tx-green{color:var(--g);font-weight:700;font-size:12px}
 
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    z-index: 1;
-  }
-  .header-meta {
-    text-align: right;
-  }
-  .header-meta .label {
-    font-size: 10px;
-    color: rgba(255,255,255,0.5);
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-  }
-  .header-meta .value {
-    font-size: 13px;
-    font-weight: 600;
-    color: rgba(255,255,255,0.9);
-    margin-top: 2px;
-  }
-  .header-pill {
-    background: var(--orange);
-    color: white;
-    border-radius: 50px;
-    padding: 8px 18px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.3px;
-    white-space: nowrap;
-  }
+.conv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
+.conv-card{background:white;border-radius:16px;border:1px solid var(--border);overflow:hidden;box-shadow:0 2px 8px rgba(27,43,107,0.06)}
+.conv-header{padding:12px 16px;font-size:12px;font-weight:700;color:white;display:flex;align-items:center;gap:8px}
+.conv-header::before{content:'●';font-size:8px;opacity:0.7}
+.conv-body{padding:8px 14px 12px}
+.conv-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F1F5F9}
+.conv-row:last-child{border-bottom:none}
+.conv-name{font-size:12px;font-weight:600;color:var(--text)}
 
-  /* ── CONTAINER ───────────────────────────────────── */
-  .container {
-    padding: 28px 32px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+.events-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:28px}
+.event-card{background:white;border-radius:16px;border:1px solid var(--border);overflow:hidden;box-shadow:0 2px 8px rgba(27,43,107,0.06)}
+.event-header{background:linear-gradient(135deg,var(--navy-d),var(--navy));padding:14px 18px}
+.ev-title{color:white;font-size:13px;font-weight:700}
+.ev-sub{color:rgba(255,255,255,0.55);font-size:10px;margin-top:3px}
+.event-body{padding:12px 16px}
+.ev-group{margin-bottom:10px}
+.ev-group:last-child{margin-bottom:0}
+.ev-group-label{
+  font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;
+  padding:3px 10px;border-radius:50px;margin-bottom:6px;display:inline-flex;align-items:center;gap:5px;
+}
+.ev-group-label::before{content:'▶';font-size:6px}
+.ev-row{display:flex;align-items:center;justify-content:space-between;padding:5px 8px;margin-bottom:3px;background:#F8FAFD;border-radius:8px;border:1px solid transparent;transition:border-color 0.15s}
+.ev-row:hover{border-color:var(--border)}
+.ev-name{font-size:11px;font-weight:600;color:var(--text)}
+.ev-right{display:flex;align-items:center;gap:6px}
+.ev-amount{background:var(--navy);color:white;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700}
+.ev-topic{font-size:10px;color:var(--muted);font-style:italic}
+.ev-pipeline{background:linear-gradient(135deg,#EFF6FF,#EEF2F8);border:1px solid #BFDBFE;border-radius:10px;padding:8px 12px;margin-top:8px;font-size:10px;color:var(--navy);font-weight:500;line-height:1.6}
+.ev-pipeline strong{font-weight:700;color:var(--orange)}
 
-  /* ── METRICS ─────────────────────────────────────── */
-  .metrics {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 14px;
-    margin-bottom: 24px;
-  }
-  .metric {
-    background: var(--white);
-    border-radius: 16px;
-    padding: 20px 16px;
-    text-align: center;
-    border: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .metric:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(27,43,107,0.10);
-  }
-  .metric::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    border-radius: 16px 16px 0 0;
-  }
-  .metric:nth-child(1)::before { background: var(--navy); }
-  .metric:nth-child(2)::before { background: var(--green); }
-  .metric:nth-child(3)::before { background: var(--blue-st); }
-  .metric:nth-child(4)::before { background: var(--yellow); }
-  .metric:nth-child(5)::before { background: var(--purple); }
-  .metric .val {
-    font-size: 34px;
-    font-weight: 900;
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-  .metric .lbl {
-    font-size: 10px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    font-weight: 600;
-  }
+.meetings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
+.meeting-card{background:white;border-radius:16px;border:1px solid var(--border);padding:16px 18px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 2px 8px rgba(27,43,107,0.06);transition:transform 0.2s,box-shadow 0.2s}
+.meeting-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(27,43,107,0.10)}
+.meeting-date-box{background:var(--navy);color:white;border-radius:12px;padding:8px 12px;text-align:center;min-width:56px;flex-shrink:0}
+.meeting-date-box.today{background:var(--orange)}
+.meeting-date-box .day{font-size:26px;font-weight:900;line-height:1}
+.meeting-date-box .month{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-top:2px;opacity:0.8}
+.meeting-info .company{font-size:14px;font-weight:700;color:var(--text)}
+.meeting-info .time{font-size:11px;color:var(--muted);margin-top:4px;font-weight:500}
+.meeting-info .note{font-size:10px;color:var(--muted);margin-top:4px;font-style:italic;background:var(--bg);border-radius:6px;padding:3px 8px;display:inline-block}
 
-  /* ── TRANSVERSAL BANNER ──────────────────────────── */
-  .transversal {
-    background: linear-gradient(135deg, #F0FDF4 0%, #EFF6FF 100%);
-    border: 1px solid #86EFAC;
-    border-radius: 14px;
-    padding: 14px 20px;
-    margin-bottom: 28px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    font-size: 12px;
-  }
-  .transversal .block-label {
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  .tx-chip {
-    background: var(--navy);
-    color: white;
-    border-radius: 50px;
-    padding: 4px 12px;
-    font-size: 11px;
-    font-weight: 700;
-  }
-  .tx-chip.orange { background: var(--orange); }
-  .tx-sep { color: var(--border); font-size: 18px; font-weight: 300; }
-  .tx-green { color: var(--green); font-weight: 700; font-size: 12px; }
+.arequipa-card{background:white;border-radius:16px;border:1px solid var(--border);overflow:hidden;margin-bottom:28px;box-shadow:0 2px 8px rgba(27,43,107,0.06)}
+.arequipa-header{background:linear-gradient(135deg,#4F1D96,#7C3AED);padding:12px 18px;color:white;font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px}
+.arequipa-header::before{content:'📍';font-size:14px}
 
-  /* ── SECTION TITLE ───────────────────────────────── */
-  .section-title {
-    font-size: 11px;
-    font-weight: 800;
-    color: var(--navy);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 14px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .section-title::before {
-    content: '';
-    display: inline-block;
-    width: 4px;
-    height: 16px;
-    background: var(--orange);
-    border-radius: 4px;
-  }
+/* ═══════════════════════════════════════════
+   PAGE: KANBAN
+═══════════════════════════════════════════ */
+.kanban-filters{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;align-items:center}
+.filter-select{
+  padding:7px 14px;border:1.5px solid var(--border);border-radius:10px;
+  font-size:12px;font-family:inherit;color:var(--text);background:white;
+  font-weight:600;outline:none;cursor:pointer;
+}
+.filter-select:focus{border-color:var(--navy)}
 
-  /* ── CONVERSATORIOS ──────────────────────────────── */
-  .conv-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-bottom: 28px;
-  }
-  .conv-card {
-    background: var(--white);
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(27,43,107,0.06);
-  }
-  .conv-header {
-    padding: 12px 16px;
-    font-size: 12px;
-    font-weight: 700;
-    color: white;
-    letter-spacing: 0.2px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .conv-header::before {
-    content: '●';
-    font-size: 8px;
-    opacity: 0.7;
-  }
-  .conv-body { padding: 8px 14px 12px; }
-  .conv-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 7px 0;
-    border-bottom: 1px solid #F1F5F9;
-  }
-  .conv-row:last-child { border-bottom: none; }
-  .conv-name {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text);
-  }
+.kanban-board{display:grid;grid-template-columns:repeat(6,minmax(180px,1fr));gap:14px;overflow-x:auto;padding-bottom:8px}
+.kanban-col{background:#F1F5FB;border-radius:14px;padding:12px;min-height:400px}
+.kanban-col-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--border);
+}
+.kanban-col-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px}
+.kanban-count{background:var(--navy);color:white;border-radius:50px;padding:2px 8px;font-size:10px;font-weight:700}
+.kanban-card{
+  background:white;border-radius:12px;padding:12px;margin-bottom:8px;
+  border:1px solid var(--border);cursor:pointer;
+  transition:transform 0.15s,box-shadow 0.15s;
+}
+.kanban-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(27,43,107,0.12)}
+.kc-company{font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px}
+.kc-event{font-size:10px;color:var(--muted);background:var(--bg);border-radius:6px;padding:2px 8px;display:inline-block;margin-bottom:8px}
+.kc-amount{
+  font-size:12px;font-weight:800;color:var(--navy);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.kc-amount .na{font-size:10px;color:var(--muted);font-weight:500;font-style:italic}
+.kc-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}
+.kc-tag{font-size:9px;font-weight:700;border-radius:4px;padding:2px 6px}
+.kc-footer{display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:1px solid #F1F5F9}
+.kc-date{font-size:10px;color:var(--muted)}
+.kc-avatar{width:22px;height:22px;border-radius:50%;background:var(--navy);color:white;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center}
 
-  /* ── BADGES ──────────────────────────────────────── */
-  .badge {
-    border-radius: 50px;
-    padding: 3px 10px;
-    font-size: 10px;
-    font-weight: 700;
-    white-space: nowrap;
-    letter-spacing: 0.2px;
-  }
-  .b-confirmado { background: var(--green-bg);  color: var(--green); }
-  .b-pendiente  { background: var(--yellow-bg); color: var(--yellow); }
-  .b-cancelado  { background: var(--red-bg);    color: var(--red); }
-  .b-cerrado    { background: var(--green-bg);  color: var(--green); }
-  .b-conv       { background: var(--blue-bg);   color: var(--blue-st); }
-  .b-porcerrar  { background: var(--purple-bg); color: var(--purple); }
-  .b-reunion    { background: var(--cyan-bg);   color: var(--cyan); }
-  .b-prosp      { background: var(--gray-bg);   color: var(--gray); }
+/* ═══════════════════════════════════════════
+   PAGE: SPONSORS LIST
+═══════════════════════════════════════════ */
+.table-toolbar{display:flex;gap:10px;margin-bottom:16px;align-items:center;flex-wrap:wrap}
+.search-input{
+  flex:1;min-width:200px;padding:8px 14px;border:1.5px solid var(--border);
+  border-radius:10px;font-size:13px;font-family:inherit;outline:none;
+  background:white;transition:border-color 0.2s;
+}
+.search-input:focus{border-color:var(--navy)}
+.btn-sm{
+  padding:7px 14px;border-radius:10px;font-size:12px;font-weight:700;
+  border:1.5px solid var(--border);background:white;color:var(--text);
+  transition:all 0.15s;
+}
+.btn-sm:hover{border-color:var(--navy);color:var(--navy)}
+.btn-sm.primary{background:var(--navy);color:white;border-color:var(--navy)}
+.btn-sm.primary:hover{background:var(--navy-d)}
 
-  /* ── EVENTS GRID ─────────────────────────────────── */
-  .events-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    margin-bottom: 28px;
-  }
-  .event-card {
-    background: var(--white);
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(27,43,107,0.06);
-  }
-  .event-header {
-    background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
-    padding: 14px 18px;
-    position: relative;
-    overflow: hidden;
-  }
-  .event-header::after {
-    content: '';
-    position: absolute;
-    top: -20px; right: -20px;
-    width: 80px; height: 80px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 50%;
-  }
-  .ev-title {
-    color: white;
-    font-size: 13px;
-    font-weight: 700;
-    position: relative;
-    z-index: 1;
-  }
-  .ev-sub {
-    color: rgba(255,255,255,0.55);
-    font-size: 10px;
-    margin-top: 3px;
-    position: relative;
-    z-index: 1;
-  }
-  .event-body { padding: 12px 16px; }
-  .ev-group { margin-bottom: 10px; }
-  .ev-group:last-child { margin-bottom: 0; }
+.sponsors-table{width:100%;border-collapse:collapse;background:white;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(27,43,107,0.06)}
+.sponsors-table th{
+  background:#F8FAFD;padding:10px 14px;text-align:left;
+  font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;
+  border-bottom:2px solid var(--border);
+}
+.sponsors-table td{padding:11px 14px;border-bottom:1px solid #F1F5F9;font-size:12px}
+.sponsors-table tr:last-child td{border-bottom:none}
+.sponsors-table tr:hover td{background:#FAFBFD;cursor:pointer}
+.company-cell{display:flex;align-items:center;gap:10px}
+.company-icon{
+  width:32px;height:32px;border-radius:8px;background:var(--navy);
+  color:white;font-size:11px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.company-name{font-weight:700;color:var(--text)}
+.company-contact{font-size:10px;color:var(--muted);margin-top:1px}
 
-  .ev-group-label {
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 50px;
-    margin-bottom: 6px;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .ev-group-label::before { content: '▶'; font-size: 6px; }
+/* ═══════════════════════════════════════════
+   PAGE: ACTIVIDADES / FORECAST
+═══════════════════════════════════════════ */
+.two-col{display:grid;grid-template-columns:1.2fr 1fr;gap:20px}
+.activity-list{display:flex;flex-direction:column;gap:0}
+.activity-item{
+  display:flex;gap:14px;padding:14px 0;
+  border-bottom:1px solid #F1F5F9;
+}
+.activity-item:last-child{border-bottom:none}
+.activity-dot{
+  width:34px;height:34px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;flex-shrink:0;margin-top:1px;
+}
+.activity-content .title{font-size:13px;font-weight:700;color:var(--text)}
+.activity-content .sub{font-size:11px;color:var(--muted);margin-top:2px}
+.activity-content .time{font-size:10px;color:var(--muted);margin-top:4px;font-style:italic}
+.activity-content .tag{
+  display:inline-block;margin-top:4px;font-size:10px;font-weight:700;
+  background:var(--bg);color:var(--navy);border-radius:6px;padding:2px 8px;
+}
 
-  .ev-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5px 8px;
-    margin-bottom: 3px;
-    background: #F8FAFD;
-    border-radius: 8px;
-    border: 1px solid transparent;
-    transition: border-color 0.15s;
-  }
-  .ev-row:hover { border-color: var(--border); }
-  .ev-name { font-size: 11px; font-weight: 600; color: var(--text); }
-  .ev-right { display: flex; align-items: center; gap: 6px; }
-  .ev-amount {
-    background: var(--navy);
-    color: white;
-    border-radius: 6px;
-    padding: 2px 8px;
-    font-size: 10px;
-    font-weight: 700;
-  }
-  .ev-topic {
-    font-size: 10px;
-    color: var(--muted);
-    font-style: italic;
-  }
-  .ev-pipeline {
-    background: linear-gradient(135deg, #EFF6FF, #EEF2F8);
-    border: 1px solid #BFDBFE;
-    border-radius: 10px;
-    padding: 8px 12px;
-    margin-top: 8px;
-    font-size: 10px;
-    color: var(--navy);
-    font-weight: 500;
-    line-height: 1.6;
-  }
-  .ev-pipeline strong { font-weight: 700; color: var(--orange); }
+.forecast-event{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 0;border-bottom:1px solid #F1F5F9;
+}
+.forecast-event:last-child{border-bottom:none}
+.fe-name{font-size:13px;font-weight:700;color:var(--text);flex:1}
+.fe-bar-wrap{flex:2;background:#F1F5F9;border-radius:6px;height:8px;overflow:hidden}
+.fe-bar{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--navy),var(--blue))}
+.fe-amount{font-size:12px;font-weight:800;color:var(--navy);min-width:60px;text-align:right}
+.fe-pct{font-size:10px;color:var(--muted);min-width:40px;text-align:right}
 
-  /* ── MEETINGS ────────────────────────────────────── */
-  .meetings-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-bottom: 28px;
-  }
-  .meeting-card {
-    background: var(--white);
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    padding: 16px 18px;
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    box-shadow: 0 2px 8px rgba(27,43,107,0.06);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .meeting-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(27,43,107,0.10);
-  }
-  .meeting-date-box {
-    background: var(--navy);
-    color: white;
-    border-radius: 12px;
-    padding: 8px 12px;
-    text-align: center;
-    min-width: 56px;
-    flex-shrink: 0;
-  }
-  .meeting-date-box.today { background: var(--orange); }
-  .meeting-date-box .day { font-size: 26px; font-weight: 900; line-height: 1; }
-  .meeting-date-box .month {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-top: 2px;
-    opacity: 0.8;
-  }
-  .meeting-info .company { font-size: 14px; font-weight: 700; color: var(--text); }
-  .meeting-info .time { font-size: 11px; color: var(--muted); margin-top: 4px; font-weight: 500; }
-  .meeting-info .note {
-    font-size: 10px;
-    color: var(--muted);
-    margin-top: 4px;
-    font-style: italic;
-    background: var(--bg);
-    border-radius: 6px;
-    padding: 3px 8px;
-    display: inline-block;
-  }
+.task-item{
+  display:flex;align-items:flex-start;gap:12px;padding:11px 0;
+  border-bottom:1px solid #F1F5F9;
+}
+.task-item:last-child{border-bottom:none}
+.task-check{
+  width:18px;height:18px;border-radius:5px;border:2px solid var(--border);
+  flex-shrink:0;margin-top:1px;cursor:pointer;transition:all 0.15s;
+  display:flex;align-items:center;justify-content:center;
+}
+.task-check:hover{border-color:var(--navy)}
+.task-check.done{background:var(--g);border-color:var(--g);color:white}
+.task-content .title{font-size:13px;font-weight:600;color:var(--text)}
+.task-content .meta{font-size:10px;color:var(--muted);margin-top:2px}
+.task-due{font-size:10px;font-weight:700;border-radius:6px;padding:2px 8px;white-space:nowrap;flex-shrink:0}
+.task-due.urgent{background:var(--rb);color:var(--r)}
+.task-due.soon{background:var(--yb);color:var(--y)}
+.task-due.ok{background:var(--gb);color:var(--g)}
 
-  /* ── AREQUIPA ────────────────────────────────────── */
-  .arequipa-card {
-    background: var(--white);
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    overflow: hidden;
-    margin-bottom: 28px;
-    box-shadow: 0 2px 8px rgba(27,43,107,0.06);
-  }
-  .arequipa-header {
-    background: linear-gradient(135deg, #4F1D96 0%, #7C3AED 100%);
-    padding: 12px 18px;
-    color: white;
-    font-size: 13px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .arequipa-header::before { content: '📍'; font-size: 14px; }
+/* ═══════════════════════════════════════════
+   MODAL — DEAL DETAIL
+═══════════════════════════════════════════ */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(18,32,90,0.5);
+  z-index:200;display:none;align-items:center;justify-content:center;
+  backdrop-filter:blur(4px);
+}
+.modal-overlay.open{display:flex}
+.modal{
+  background:white;border-radius:20px;width:620px;max-height:85vh;
+  overflow-y:auto;box-shadow:0 40px 100px rgba(0,0,0,0.3);
+}
+.modal-header{
+  background:linear-gradient(135deg,var(--navy-d),var(--navy));
+  padding:20px 24px;border-radius:20px 20px 0 0;
+  display:flex;align-items:flex-start;justify-content:space-between;
+}
+.modal-company{font-size:20px;font-weight:900;color:white}
+.modal-event{font-size:11px;color:rgba(255,255,255,0.6);margin-top:3px}
+.modal-close{
+  background:rgba(255,255,255,0.15);border:none;color:white;
+  width:32px;height:32px;border-radius:8px;font-size:16px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  flex-shrink:0;
+}
+.modal-close:hover{background:rgba(255,255,255,0.25)}
+.modal-body{padding:24px}
+.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.detail-field .lbl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px}
+.detail-field .val{font-size:14px;font-weight:700;color:var(--text)}
+.modal-notes{background:#F8FAFD;border-radius:12px;padding:14px 16px;margin-bottom:20px;font-size:13px;color:var(--muted);font-style:italic;border:1px solid var(--border)}
+.modal-timeline .tl-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #F1F5F9}
+.modal-timeline .tl-item:last-child{border-bottom:none}
+.tl-dot{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.tl-content .tl-title{font-size:12px;font-weight:700;color:var(--text)}
+.tl-content .tl-date{font-size:10px;color:var(--muted);margin-top:2px}
+.modal-actions{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.action-btn{
+  padding:8px 16px;border-radius:10px;font-size:12px;font-weight:700;
+  border:1.5px solid var(--border);background:white;color:var(--text);
+  transition:all 0.15s;display:flex;align-items:center;gap:6px;
+}
+.action-btn:hover{border-color:var(--navy);color:var(--navy)}
+.action-btn.primary{background:var(--navy);color:white;border-color:var(--navy)}
+.action-btn.primary:hover{background:var(--navy-d)}
+.action-btn.orange{background:var(--orange);color:white;border-color:var(--orange)}
 
-  /* ── FOOTER ──────────────────────────────────────── */
-  .footer {
-    background: var(--navy-dark);
-    color: rgba(255,255,255,0.4);
-    text-align: center;
-    padding: 18px 32px;
-    font-size: 11px;
-  }
-  .footer span { color: rgba(255,255,255,0.7); font-weight: 600; }
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+.footer{background:var(--navy-d);color:rgba(255,255,255,0.4);text-align:center;padding:14px 32px;font-size:11px}
+.footer span{color:rgba(255,255,255,0.7);font-weight:600}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="header">
-  <div class="header-left">
-    <!-- ALTAG Logo SVG recreado -->
-    <svg class="logo-emblem" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="22" cy="22" r="21" fill="white" fill-opacity="0.12" stroke="white" stroke-opacity="0.3" stroke-width="1.5"/>
-      <circle cx="22" cy="22" r="16" fill="white" fill-opacity="0.08"/>
-      <!-- Wheat/leaf motif -->
-      <path d="M22 32 L22 14" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-      <path d="M22 26 Q18 22 16 18" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-      <path d="M22 26 Q26 22 28 18" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-      <path d="M22 22 Q18 18 17 14" stroke="white" stroke-width="1.3" stroke-linecap="round" fill="none" opacity="0.7"/>
-      <path d="M22 22 Q26 18 27 14" stroke="white" stroke-width="1.3" stroke-linecap="round" fill="none" opacity="0.7"/>
-      <path d="M22 18 Q20 15 20 13" stroke="white" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.5"/>
-      <path d="M22 18 Q24 15 24 13" stroke="white" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.5"/>
-    </svg>
-    <div class="header-titles">
-      <div class="header-title">Pipeline de Sponsors 2026</div>
-      <div class="header-sub">ALTAG — Dashboard de seguimiento comercial</div>
+<!-- ══════════════════════════════════════
+     LOGIN SCREEN
+══════════════════════════════════════ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <svg viewBox="0 0 52 52" fill="none">
+        <circle cx="26" cy="26" r="25" fill="#1B2B6B" stroke="#1B2B6B" stroke-width="1"/>
+        <circle cx="26" cy="26" r="18" fill="white" fill-opacity="0.1"/>
+        <path d="M26 38 L26 16" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M26 30 Q21 25 18 20" stroke="white" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+        <path d="M26 30 Q31 25 34 20" stroke="white" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+        <path d="M26 25 Q21 20 20 16" stroke="white" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.7"/>
+        <path d="M26 25 Q31 20 32 16" stroke="white" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.7"/>
+      </svg>
+      <div class="brand">ALT<span>AG</span></div>
     </div>
-  </div>
-  <div class="header-right">
-    <div class="header-meta">
-      <div class="label">Última actualización</div>
-      <div class="value">Mayo 2026</div>
+    <div class="login-title">Sponsor CRM 2026</div>
+    <div class="login-sub">Dashboard comercial · Uso interno</div>
+
+    <div class="field">
+      <label>Usuario</label>
+      <input type="text" id="inp-user" placeholder="Tu usuario" autocomplete="username">
     </div>
-    <div class="header-pill">Activo</div>
+    <div class="field">
+      <label>Contraseña</label>
+      <input type="password" id="inp-pass" placeholder="••••••••••" autocomplete="current-password">
+    </div>
+    <button class="btn-login" onclick="doLogin()">Ingresar</button>
+    <div class="login-error" id="login-error">Usuario o contraseña incorrectos</div>
+    <div class="login-footer">© 2026 ALTAG · Acceso restringido</div>
   </div>
 </div>
 
-<div class="container">
+<!-- ══════════════════════════════════════
+     APP
+══════════════════════════════════════ -->
+<div id="app">
 
-  <!-- MÉTRICAS -->
-  <div class="metrics">
-    <div class="metric">
-      <div class="val" style="color:var(--navy)">7</div>
-      <div class="lbl">Eventos Activos</div>
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-logo">
+        <svg viewBox="0 0 52 52" fill="none">
+          <circle cx="26" cy="26" r="25" fill="white" fill-opacity="0.15"/>
+          <path d="M26 38 L26 16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <path d="M26 30 Q21 25 18 20" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M26 30 Q31 25 34 20" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M26 25 Q21 20 20 16" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.7"/>
+          <path d="M26 25 Q31 20 32 16" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.7"/>
+        </svg>
+        <div class="brand">ALT<span>AG</span></div>
+      </div>
+      <div class="topbar-divider"></div>
+      <nav class="nav">
+        <button class="nav-btn active" onclick="showPage('dashboard',this)"><span class="icon">📊</span> Dashboard</button>
+        <button class="nav-btn" onclick="showPage('kanban',this)"><span class="icon">🗂</span> Pipeline</button>
+        <button class="nav-btn" onclick="showPage('sponsors',this)"><span class="icon">🏢</span> Sponsors</button>
+        <button class="nav-btn" onclick="showPage('actividades',this)"><span class="icon">⚡</span> Actividad</button>
+      </nav>
     </div>
-    <div class="metric">
-      <div class="val" style="color:var(--green)">4</div>
-      <div class="lbl">Deals Cerrados</div>
-    </div>
-    <div class="metric">
-      <div class="val" style="color:var(--blue-st)">300+</div>
-      <div class="lbl">En Prospección</div>
-    </div>
-    <div class="metric">
-      <div class="val" style="color:var(--yellow)">12</div>
-      <div class="lbl">Por Confirmar</div>
-    </div>
-    <div class="metric">
-      <div class="val" style="color:var(--purple)">3</div>
-      <div class="lbl">Por Cerrar</div>
-    </div>
-  </div>
-
-  <!-- TRANSVERSAL BANNER -->
-  <div class="transversal">
-    <span class="block-label">Transversal</span>
-    <span class="tx-chip">Scotiabank</span>
-    <span class="tx-chip">Pac. Seguros · $24.9K total · $4.98K/evento</span>
-    <span class="tx-sep">|</span>
-    <span class="block-label">Alianza</span>
-    <span class="tx-chip" style="background:#0891B2">Perú Retail</span>
-    <span class="tx-sep">|</span>
-    <span class="block-label">En reunión</span>
-    <span class="tx-chip orange">Greenline</span>
-    <span class="tx-green">Propuesta enviada 27/05 · $24.9K total · $4.98K/evento</span>
-  </div>
-
-  <!-- CONVERSATORIOS DSS -->
-  <div class="section-title">Digital Sales Summit — Conversatorios</div>
-  <div class="conv-grid">
-
-    <div class="conv-card">
-      <div class="conv-header" style="background:linear-gradient(135deg,#15803D,#16A34A)">Conversatorio Financiero</div>
-      <div class="conv-body">
-        <div class="conv-row"><span class="conv-name">Rextie</span><span class="badge b-confirmado">Confirmado</span></div>
-        <div class="conv-row"><span class="conv-name">Uge · Virtual Asesores</span><span class="badge b-confirmado">Confirmado</span></div>
-        <div class="conv-row"><span class="conv-name">Yape</span><span class="badge b-pendiente">Por confirmar</span></div>
-        <div class="conv-row"><span class="conv-name">KasNet</span><span class="badge b-pendiente">Por confirmar</span></div>
-        <div class="conv-row"><span class="conv-name">Izipay</span><span class="badge b-cancelado">Canceló</span></div>
-        <div class="conv-row"><span class="conv-name">Diner Club</span><span class="badge b-cancelado">Canceló</span></div>
+    <div class="topbar-right">
+      <div class="user-badge">
+        <div class="user-avatar" id="user-avatar">B</div>
+        <div class="user-name" id="user-name">Bego</div>
       </div>
-    </div>
-
-    <div class="conv-card">
-      <div class="conv-header" style="background:linear-gradient(135deg,#6D28D9,#7C3AED)">Conversatorio Retos de IA</div>
-      <div class="conv-body">
-        <div class="conv-row"><span class="conv-name">Ramo</span><span class="badge b-confirmado">Confirmado</span></div>
-        <div class="conv-row"><span class="conv-name">Impulse</span><span class="badge b-confirmado">Confirmado</span></div>
-        <div class="conv-row"><span class="conv-name">Falabella</span><span class="badge b-confirmado">Confirmado</span></div>
-        <div class="conv-row"><span class="conv-name">Onleadz</span><span class="badge b-pendiente">Por confirmar</span></div>
-        <div class="conv-row"><span class="conv-name">Rappi</span><span class="badge b-pendiente">Por confirmar</span></div>
-        <div class="conv-row"><span class="conv-name">Movistar</span><span class="badge b-pendiente">Por confirmar</span></div>
-      </div>
-    </div>
-
-    <div class="conv-card">
-      <div class="conv-header" style="background:linear-gradient(135deg,#0369A1,#0891B2)">Conversatorio Estrategia de Canal</div>
-      <div class="conv-body">
-        <div class="conv-row"><span class="conv-name">Capece</span><span class="badge b-confirmado">Confirmado</span></div>
-        <div class="conv-row"><span class="conv-name">Pac. Seguros</span><span class="badge b-confirmado">Confirmado</span></div>
-        <div class="conv-row"><span class="conv-name">Aje Group</span><span class="badge b-confirmado">Confirmado</span></div>
-        <div class="conv-row"><span class="conv-name">Rappi</span><span class="badge b-pendiente">Por confirmar</span></div>
-        <div class="conv-row"><span class="conv-name">Movistar</span><span class="badge b-pendiente">Por confirmar</span></div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- PIPELINE POR EVENTO -->
-  <div class="section-title">Pipeline por Evento</div>
-  <div class="events-grid">
-
-    <!-- DSS -->
-    <div class="event-card">
-      <div class="event-header">
-        <div class="ev-title">Digital Sales Summit</div>
-      </div>
-      <div class="event-body">
-        <div class="ev-group">
-          <div class="ev-group-label" style="background:var(--green-bg);color:var(--green)">Cerrado</div>
-          <div class="ev-row"><span class="ev-name">LaTAM</span><div class="ev-right"><span class="ev-amount">$4K</span></div></div>
-          <div class="ev-row"><span class="ev-name">Univ. Pacífico</span><div class="ev-right"><span class="ev-amount">$3K</span></div></div>
-          <div class="ev-row"><span class="ev-name">Capece</span><div class="ev-right"><span class="ev-topic">Estrategia de Canal</span></div></div>
-          <div class="ev-row"><span class="ev-name">Pac. Seguros</span><div class="ev-right"><span class="ev-amount">$2.5K</span><span class="ev-topic">Estrategia Canal</span></div></div>
-        </div>
-        <div class="ev-group">
-          <div class="ev-group-label" style="background:var(--blue-bg);color:var(--blue-st)">En Conversación</div>
-          <div class="ev-row"><span class="ev-name">Yape</span><div class="ev-right"><span class="ev-topic">Conv. Financiero</span></div></div>
-          <div class="ev-row"><span class="ev-name">McCann</span><div class="ev-right"><span class="ev-topic">Estrategia Canal</span></div></div>
-          <div class="ev-row"><span class="ev-name">Natura</span><div class="ev-right"><span class="ev-topic">Historia de éxito</span></div></div>
-          <div class="ev-row"><span class="ev-name">Rextie</span><div class="ev-right"></div></div>
-        </div>
-        <div class="ev-group">
-          <div class="ev-group-label" style="background:var(--yellow-bg);color:var(--yellow)">Por Confirmar</div>
-          <div class="ev-row"><span class="ev-name">Aje Group</span><div class="ev-right"><span class="ev-amount">$2.5K</span><span class="ev-topic">Estrategia · Historia Éxito</span></div></div>
-          <div class="ev-row"><span class="ev-name">KasNet</span><div class="ev-right"><span class="ev-amount">$2.5K</span><span class="ev-topic">Conv. Financiero</span></div></div>
-          <div class="ev-row"><span class="ev-name">Rebaza</span><div class="ev-right"><span class="ev-amount">$2.5K</span><span class="ev-topic">Retos IA</span></div></div>
-          <div class="ev-row"><span class="ev-name">Softek</span><div class="ev-right"><span class="ev-amount">$3.4K</span><span class="ev-topic">Estrategia Canal</span></div></div>
-          <div class="ev-row"><span class="ev-name">SIP</span><div class="ev-right"><span class="ev-amount">$4.5K</span><span class="ev-topic">Conv. Financiero</span></div></div>
-        </div>
-        <div class="ev-group">
-          <div class="ev-group-label" style="background:var(--cyan-bg);color:var(--cyan)">Reunión Agendada</div>
-          <div class="ev-row"><span class="ev-name">La Positiva</span><div class="ev-right"><span class="ev-topic">Prospecto NASA</span></div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- XIV CONGRESO -->
-    <div class="event-card">
-      <div class="event-header">
-        <div class="ev-title">XIV Congreso Empresas Familiares</div>
-        <div class="ev-sub">En paralelo con Foro Internacional de IA</div>
-      </div>
-      <div class="event-body">
-        <div class="ev-group">
-          <div class="ev-group-label" style="background:var(--yellow-bg);color:var(--yellow)">Por Confirmar</div>
-          <div class="ev-row"><span class="ev-name">AEF</span><div class="ev-right"><span class="ev-amount">$11.9K</span></div></div>
-          <div class="ev-row"><span class="ev-name">Seidor</span><div class="ev-right"><span class="ev-amount">$3.2K</span></div></div>
-          <div class="ev-row"><span class="ev-name">Vinci Compass</span><div class="ev-right"></div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- INNOVATION BY NASA -->
-    <div class="event-card">
-      <div class="event-header">
-        <div class="ev-title">Innovation by NASA</div>
-      </div>
-      <div class="event-body">
-        <div class="ev-group">
-          <div class="ev-group-label" style="background:var(--green-bg);color:var(--green)">Cerrado</div>
-          <div class="ev-row"><span class="ev-name">LaTAM</span><div class="ev-right"><span class="ev-amount">$4K</span></div></div>
-        </div>
-        <div class="ev-group">
-          <div class="ev-group-label" style="background:var(--purple-bg);color:var(--purple)">Por Cerrar</div>
-          <div class="ev-row"><span class="ev-name">Rimac</span><div class="ev-right"><span class="ev-amount">$5.9K</span></div></div>
-          <div class="ev-row"><span class="ev-name">Entel</span><div class="ev-right"><span class="ev-amount">$4.5K</span></div></div>
-          <div class="ev-row"><span class="ev-name">Credicorp</span><div class="ev-right"><span class="ev-amount">$9.9–14.9K</span></div></div>
-        </div>
-        <div class="ev-group">
-          <div class="ev-group-label" style="background:var(--yellow-bg);color:var(--yellow)">Por Confirmar</div>
-          <div class="ev-row"><span class="ev-name">CSTI Corp</span><div class="ev-right"><span class="ev-amount">$7.9K</span><span class="ev-topic">Prop. enviada · tb. Foro IA</span></div></div>
-        </div>
-        <div class="ev-group">
-          <div class="ev-group-label" style="background:var(--gray-bg);color:var(--gray)">En Prospección</div>
-          <div class="ev-row"><span class="ev-name">ESET</span><div class="ev-right"></div></div>
-          <div class="ev-row"><span class="ev-name">Univ. Continental</span><div class="ev-right"></div></div>
-          <div class="ev-row"><span class="ev-name">La Positiva</span><div class="ev-right"><span class="ev-topic">Vía DSS</span></div></div>
-        </div>
-        <div class="ev-pipeline">
-          <strong>Pipeline cuantificado:</strong> LaTAM $4K · Rimac $5.9K · Entel $4.5K · Credicorp $9.9–14.9K · CSTI Corp $7.9K
-        </div>
-      </div>
-    </div>
-
-    <!-- FORO IA -->
-    <div class="event-card">
-      <div class="event-header">
-        <div class="ev-title">Foro Internacional de IA</div>
-        <div class="ev-sub">En paralelo con XIV Congreso de Empresas Familiares</div>
-      </div>
-      <div class="event-body">
-        <div class="ev-group">
-          <div class="ev-group-label" style="background:var(--green-bg);color:var(--green)">Cerrado</div>
-          <div class="ev-row"><span class="ev-name">LaTAM</span><div class="ev-right"><span class="ev-amount">$4K</span></div></div>
-          <div class="ev-row"><span class="ev-name">Univ. Pacífico</span><div class="ev-right"><span class="ev-amount">$3K</span></div></div>
-          <div class="ev-row"><span class="ev-name">PWC</span><div class="ev-right"><span class="ev-amount">$3K</span></div></div>
-        </div>
-        <div class="ev-group">
-          <div class="ev-group-label" style="background:var(--yellow-bg);color:var(--yellow)">Por Confirmar</div>
-          <div class="ev-row"><span class="ev-name">Entel</span><div class="ev-right"><span class="ev-amount">$7.9K</span><span class="ev-topic">incl. Coffee</span></div></div>
-          <div class="ev-row"><span class="ev-name">KSE</span><div class="ev-right"></div></div>
-          <div class="ev-row"><span class="ev-name">CSTI Corp</span><div class="ev-right"><span class="ev-amount">$7.9K</span><span class="ev-topic">Prop. enviada · tb. NASA</span></div></div>
-        </div>
-        <div class="ev-group">
-          <div class="ev-group-label" style="background:var(--cyan-bg);color:var(--cyan)">Reunión Agendada</div>
-          <div class="ev-row"><span class="ev-name">EpicTravel</span><div class="ev-right"></div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- FOR-ME -->
-    <div class="event-card">
-      <div class="event-header">
-        <div class="ev-title">Foro Mujeres Empresarias For-Me</div>
-      </div>
-      <div class="event-body">
-        <div class="ev-group">
-          <div class="ev-group-label" style="background:var(--green-bg);color:var(--green)">Cerrado</div>
-          <div class="ev-row"><span class="ev-name">LaTAM</span><div class="ev-right"><span class="ev-amount">$4K</span></div></div>
-          <div class="ev-row"><span class="ev-name">Univ. Pacífico</span><div class="ev-right"><span class="ev-amount">$3K</span></div></div>
-        </div>
-        <div class="ev-group">
-          <div class="ev-group-label" style="background:var(--yellow-bg);color:var(--yellow)">Por Confirmar</div>
-          <div class="ev-row"><span class="ev-name">Natura</span><div class="ev-right"><span class="ev-topic">Quiere participar · sin monto</span></div></div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- PRÓXIMAS REUNIONES -->
-  <div class="section-title">Próximas Reuniones</div>
-  <div class="meetings-grid">
-
-    <div class="meeting-card">
-      <div class="meeting-date-box today">
-        <div class="day">28</div>
-        <div class="month">MAY</div>
-      </div>
-      <div class="meeting-info">
-        <div class="company">Izipay</div>
-        <div class="time">Hoy · 4:30 PM</div>
-        <div class="note">Conversatorio Financiero DSS</div>
-      </div>
-    </div>
-
-    <div class="meeting-card">
-      <div class="meeting-date-box">
-        <div class="day">4</div>
-        <div class="month">JUN</div>
-      </div>
-      <div class="meeting-info">
-        <div class="company">Univ. Continental</div>
-        <div class="time">11:00 AM</div>
-        <div class="note">Prospecto Innovation by NASA</div>
-      </div>
-    </div>
-
-    <div class="meeting-card">
-      <div class="meeting-date-box">
-        <div class="day">4</div>
-        <div class="month">JUN</div>
-      </div>
-      <div class="meeting-info">
-        <div class="company">Vinci Compass</div>
-        <div class="time">4:30 PM</div>
-        <div class="note">Conversatorio Financiero DSS</div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- AREQUIPA -->
-  <div class="section-title">Arequipa</div>
-  <div class="arequipa-card">
-    <div class="arequipa-header">Eventos en Arequipa</div>
-    <div class="event-body" style="padding:14px 16px">
-      <div class="ev-group">
-        <div class="ev-group-label" style="background:var(--yellow-bg);color:var(--yellow)">Por Confirmar</div>
-        <div class="ev-row"><span class="ev-name">UCSP</span><div class="ev-right"><span class="ev-amount">$5.9K</span></div></div>
-        <div class="ev-row"><span class="ev-name">Buk</span><div class="ev-right"><span class="ev-amount">$3K</span></div></div>
-      </div>
+      <button class="btn-logout" onclick="doLogout()">Salir</button>
     </div>
   </div>
 
+  <!-- ── PAGE: DASHBOARD ── -->
+  <div class="main">
+
+  <div class="page active" id="page-dashboard">
+
+    <!-- MÉTRICAS -->
+    <div class="metrics">
+      <div class="metric"><div class="val" style="color:var(--navy)">7</div><div class="lbl">Eventos Activos</div></div>
+      <div class="metric"><div class="val" style="color:var(--g)">4</div><div class="lbl">Deals Cerrados</div></div>
+      <div class="metric"><div class="val" style="color:var(--bl)">300+</div><div class="lbl">En Prospección</div></div>
+      <div class="metric"><div class="val" style="color:var(--y)">12</div><div class="lbl">Por Confirmar</div></div>
+      <div class="metric"><div class="val" style="color:var(--p)">3</div><div class="lbl">Por Cerrar</div></div>
+    </div>
+
+    <!-- TRANSVERSAL -->
+    <div class="transversal">
+      <span class="block-label">Transversal</span>
+      <span class="tx-chip">Scotiabank</span>
+      <span class="tx-chip">Pac. Seguros · $24.9K · $4.98K/evento</span>
+      <span class="tx-sep">|</span>
+      <span class="block-label">Alianza</span>
+      <span class="tx-chip cyan">Perú Retail</span>
+      <span class="tx-sep">|</span>
+      <span class="block-label">En reunión</span>
+      <span class="tx-chip orange">Greenline</span>
+      <span class="tx-green">Propuesta enviada 27/05 · $24.9K total · $4.98K/evento</span>
+    </div>
+
+    <!-- CONVERSATORIOS -->
+    <div class="section-title"><div class="section-title-left">Digital Sales Summit — Conversatorios</div></div>
+    <div class="conv-grid">
+      <div class="conv-card">
+        <div class="conv-header" style="background:linear-gradient(135deg,#15803D,#16A34A)">Conversatorio Financiero</div>
+        <div class="conv-body">
+          <div class="conv-row"><span class="conv-name">Rextie</span><span class="badge b-conf">Confirmado</span></div>
+          <div class="conv-row"><span class="conv-name">Uge · Virtual Asesores</span><span class="badge b-conf">Confirmado</span></div>
+          <div class="conv-row"><span class="conv-name">Yape</span><span class="badge b-pend">Por confirmar</span></div>
+          <div class="conv-row"><span class="conv-name">KasNet</span><span class="badge b-pend">Por confirmar</span></div>
+          <div class="conv-row"><span class="conv-name">Izipay</span><span class="badge b-canc">Canceló</span></div>
+          <div class="conv-row"><span class="conv-name">Diner Club</span><span class="badge b-canc">Canceló</span></div>
+        </div>
+      </div>
+      <div class="conv-card">
+        <div class="conv-header" style="background:linear-gradient(135deg,#6D28D9,#7C3AED)">Conversatorio Retos de IA</div>
+        <div class="conv-body">
+          <div class="conv-row"><span class="conv-name">Ramo</span><span class="badge b-conf">Confirmado</span></div>
+          <div class="conv-row"><span class="conv-name">Impulse</span><span class="badge b-conf">Confirmado</span></div>
+          <div class="conv-row"><span class="conv-name">Falabella</span><span class="badge b-conf">Confirmado</span></div>
+          <div class="conv-row"><span class="conv-name">Onleadz</span><span class="badge b-pend">Por confirmar</span></div>
+          <div class="conv-row"><span class="conv-name">Rappi</span><span class="badge b-pend">Por confirmar</span></div>
+          <div class="conv-row"><span class="conv-name">Movistar</span><span class="badge b-pend">Por confirmar</span></div>
+        </div>
+      </div>
+      <div class="conv-card">
+        <div class="conv-header" style="background:linear-gradient(135deg,#0369A1,#0891B2)">Conversatorio Estrategia de Canal</div>
+        <div class="conv-body">
+          <div class="conv-row"><span class="conv-name">Capece</span><span class="badge b-conf">Confirmado</span></div>
+          <div class="conv-row"><span class="conv-name">Pac. Seguros</span><span class="badge b-conf">Confirmado</span></div>
+          <div class="conv-row"><span class="conv-name">Aje Group</span><span class="badge b-conf">Confirmado</span></div>
+          <div class="conv-row"><span class="conv-name">Rappi</span><span class="badge b-pend">Por confirmar</span></div>
+          <div class="conv-row"><span class="conv-name">Movistar</span><span class="badge b-pend">Por confirmar</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EVENTOS -->
+    <div class="section-title"><div class="section-title-left">Pipeline por Evento</div></div>
+    <div class="events-grid">
+      <div class="event-card">
+        <div class="event-header"><div class="ev-title">Digital Sales Summit</div></div>
+        <div class="event-body">
+          <div class="ev-group">
+            <div class="ev-group-label" style="background:var(--gb);color:var(--g)">Cerrado</div>
+            <div class="ev-row"><span class="ev-name">LaTAM</span><div class="ev-right"><span class="ev-amount">$4K</span></div></div>
+            <div class="ev-row"><span class="ev-name">Univ. Pacífico</span><div class="ev-right"><span class="ev-amount">$3K</span></div></div>
+            <div class="ev-row"><span class="ev-name">Capece</span><div class="ev-right"><span class="ev-topic">Estrategia de Canal</span></div></div>
+            <div class="ev-row"><span class="ev-name">Pac. Seguros</span><div class="ev-right"><span class="ev-amount">$2.5K</span><span class="ev-topic">Estrategia Canal</span></div></div>
+          </div>
+          <div class="ev-group">
+            <div class="ev-group-label" style="background:var(--bb);color:var(--bl)">En Conversación</div>
+            <div class="ev-row"><span class="ev-name">Yape</span><div class="ev-right"><span class="ev-topic">Conv. Financiero</span></div></div>
+            <div class="ev-row"><span class="ev-name">McCann</span><div class="ev-right"><span class="ev-topic">Estrategia Canal</span></div></div>
+            <div class="ev-row"><span class="ev-name">Natura</span><div class="ev-right"><span class="ev-topic">Historia de éxito</span></div></div>
+            <div class="ev-row"><span class="ev-name">Rextie</span><div class="ev-right"></div></div>
+          </div>
+          <div class="ev-group">
+            <div class="ev-group-label" style="background:var(--yb);color:var(--y)">Por Confirmar</div>
+            <div class="ev-row"><span class="ev-name">Aje Group</span><div class="ev-right"><span class="ev-amount">$2.5K</span><span class="ev-topic">Estrategia · Historia Éxito</span></div></div>
+            <div class="ev-row"><span class="ev-name">KasNet</span><div class="ev-right"><span class="ev-amount">$2.5K</span><span class="ev-topic">Conv. Financiero</span></div></div>
+            <div class="ev-row"><span class="ev-name">Rebaza</span><div class="ev-right"><span class="ev-amount">$2.5K</span><span class="ev-topic">Retos IA</span></div></div>
+            <div class="ev-row"><span class="ev-name">Softek</span><div class="ev-right"><span class="ev-amount">$3.4K</span><span class="ev-topic">Estrategia Canal</span></div></div>
+            <div class="ev-row"><span class="ev-name">SIP</span><div class="ev-right"><span class="ev-amount">$4.5K</span><span class="ev-topic">Conv. Financiero</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-header"><div class="ev-title">Innovation by NASA</div></div>
+        <div class="event-body">
+          <div class="ev-group">
+            <div class="ev-group-label" style="background:var(--gb);color:var(--g)">Cerrado</div>
+            <div class="ev-row"><span class="ev-name">LaTAM</span><div class="ev-right"><span class="ev-amount">$4K</span></div></div>
+          </div>
+          <div class="ev-group">
+            <div class="ev-group-label" style="background:var(--pb);color:var(--p)">Por Cerrar</div>
+            <div class="ev-row"><span class="ev-name">Rimac</span><div class="ev-right"><span class="ev-amount">$5.9K</span></div></div>
+            <div class="ev-row"><span class="ev-name">Entel</span><div class="ev-right"><span class="ev-amount">$4.5K</span></div></div>
+            <div class="ev-row"><span class="ev-name">Credicorp</span><div class="ev-right"><span class="ev-amount">$9.9–14.9K</span></div></div>
+          </div>
+          <div class="ev-group">
+            <div class="ev-group-label" style="background:var(--yb);color:var(--y)">Por Confirmar</div>
+            <div class="ev-row"><span class="ev-name">CSTI Corp</span><div class="ev-right"><span class="ev-amount">$7.9K</span><span class="ev-topic">tb. Foro IA</span></div></div>
+          </div>
+          <div class="ev-pipeline"><strong>Pipeline:</strong> LaTAM $4K · Rimac $5.9K · Entel $4.5K · Credicorp $9.9–14.9K · CSTI $7.9K</div>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-header"><div class="ev-title">Foro Internacional de IA</div><div class="ev-sub">En paralelo con XIV Congreso</div></div>
+        <div class="event-body">
+          <div class="ev-group">
+            <div class="ev-group-label" style="background:var(--gb);color:var(--g)">Cerrado</div>
+            <div class="ev-row"><span class="ev-name">LaTAM</span><div class="ev-right"><span class="ev-amount">$4K</span></div></div>
+            <div class="ev-row"><span class="ev-name">Univ. Pacífico</span><div class="ev-right"><span class="ev-amount">$3K</span></div></div>
+            <div class="ev-row"><span class="ev-name">PWC</span><div class="ev-right"><span class="ev-amount">$3K</span></div></div>
+          </div>
+          <div class="ev-group">
+            <div class="ev-group-label" style="background:var(--yb);color:var(--y)">Por Confirmar</div>
+            <div class="ev-row"><span class="ev-name">Entel</span><div class="ev-right"><span class="ev-amount">$7.9K</span><span class="ev-topic">incl. Coffee</span></div></div>
+            <div class="ev-row"><span class="ev-name">CSTI Corp</span><div class="ev-right"><span class="ev-amount">$7.9K</span><span class="ev-topic">tb. NASA</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-header"><div class="ev-title">XIV Congreso Empresas Familiares</div></div>
+        <div class="event-body">
+          <div class="ev-group">
+            <div class="ev-group-label" style="background:var(--yb);color:var(--y)">Por Confirmar</div>
+            <div class="ev-row"><span class="ev-name">AEF</span><div class="ev-right"><span class="ev-amount">$11.9K</span></div></div>
+            <div class="ev-row"><span class="ev-name">Seidor</span><div class="ev-right"><span class="ev-amount">$3.2K</span></div></div>
+            <div class="ev-row"><span class="ev-name">Vinci Compass</span><div class="ev-right"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REUNIONES -->
+    <div class="section-title"><div class="section-title-left">Próximas Reuniones</div></div>
+    <div class="meetings-grid">
+      <div class="meeting-card">
+        <div class="meeting-date-box today"><div class="day">28</div><div class="month">MAY</div></div>
+        <div class="meeting-info">
+          <div class="company">Izipay</div>
+          <div class="time">Hoy · 4:30 PM</div>
+          <div class="note">Conversatorio Financiero DSS</div>
+        </div>
+      </div>
+      <div class="meeting-card">
+        <div class="meeting-date-box"><div class="day">4</div><div class="month">JUN</div></div>
+        <div class="meeting-info">
+          <div class="company">Univ. Continental</div>
+          <div class="time">11:00 AM</div>
+          <div class="note">Prospecto Innovation by NASA</div>
+        </div>
+      </div>
+      <div class="meeting-card">
+        <div class="meeting-date-box"><div class="day">4</div><div class="month">JUN</div></div>
+        <div class="meeting-info">
+          <div class="company">Vinci Compass</div>
+          <div class="time">4:30 PM</div>
+          <div class="note">Conversatorio Financiero DSS</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AREQUIPA -->
+    <div class="section-title"><div class="section-title-left">Arequipa</div></div>
+    <div class="arequipa-card">
+      <div class="arequipa-header">Eventos en Arequipa</div>
+      <div class="event-body" style="padding:14px 16px">
+        <div class="ev-group">
+          <div class="ev-group-label" style="background:var(--yb);color:var(--y)">Por Confirmar</div>
+          <div class="ev-row"><span class="ev-name">UCSP</span><div class="ev-right"><span class="ev-amount">$5.9K</span></div></div>
+          <div class="ev-row"><span class="ev-name">Buk</span><div class="ev-right"><span class="ev-amount">$3K</span></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /page-dashboard -->
+
+  <!-- ── PAGE: KANBAN ── -->
+  <div class="page" id="page-kanban">
+    <div class="section-title">
+      <div class="section-title-left">Pipeline Kanban — Todos los Deals</div>
+      <span style="font-size:11px;color:var(--muted);font-weight:500;text-transform:none;letter-spacing:0">Click en una card para ver el detalle</span>
+    </div>
+    <div class="kanban-filters">
+      <select class="filter-select" onchange="filterKanban(this.value)">
+        <option value="">Todos los eventos</option>
+        <option value="DSS">Digital Sales Summit</option>
+        <option value="NASA">Innovation by NASA</option>
+        <option value="Foro IA">Foro Internacional de IA</option>
+        <option value="Congreso">XIV Congreso Fam.</option>
+        <option value="For-Me">Foro For-Me</option>
+        <option value="Arequipa">Arequipa</option>
+      </select>
+      <select class="filter-select">
+        <option>Todos los montos</option>
+        <option>Mayor a $5K</option>
+        <option>$2K – $5K</option>
+        <option>Menor a $2K</option>
+      </select>
+    </div>
+    <div class="kanban-board" id="kanban-board">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+
+  <!-- ── PAGE: SPONSORS ── -->
+  <div class="page" id="page-sponsors">
+    <div class="section-title"><div class="section-title-left">Directorio de Sponsors</div></div>
+    <div class="table-toolbar">
+      <input class="search-input" type="text" placeholder="🔍  Buscar empresa, contacto o evento..." oninput="filterTable(this.value)">
+      <select class="filter-select" onchange="filterByStatus(this.value)">
+        <option value="">Todos los estados</option>
+        <option value="Cerrado">Cerrado</option>
+        <option value="Por Cerrar">Por Cerrar</option>
+        <option value="Por Confirmar">Por Confirmar</option>
+        <option value="En Conversación">En Conversación</option>
+        <option value="Reunión Agendada">Reunión Agendada</option>
+        <option value="En Prospección">En Prospección</option>
+        <option value="Canceló">Canceló</option>
+      </select>
+      <select class="filter-select">
+        <option>Todos los eventos</option>
+        <option>Digital Sales Summit</option>
+        <option>Innovation by NASA</option>
+        <option>Foro IA</option>
+        <option>XIV Congreso</option>
+        <option>For-Me</option>
+      </select>
+    </div>
+    <table class="sponsors-table" id="sponsors-table">
+      <thead>
+        <tr>
+          <th>Empresa</th>
+          <th>Evento</th>
+          <th>Monto</th>
+          <th>Estado</th>
+          <th>Próxima Acción</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody id="sponsors-tbody">
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── PAGE: ACTIVIDADES ── -->
+  <div class="page" id="page-actividades">
+    <div class="two-col">
+
+      <!-- Columna izquierda: actividades recientes + tareas -->
+      <div>
+        <div class="section-title"><div class="section-title-left">Actividad Reciente</div></div>
+        <div class="card" style="padding:8px 16px;margin-bottom:20px">
+          <div class="activity-list">
+            <div class="activity-item">
+              <div class="activity-dot" style="background:#DCFCE7;font-size:16px">📧</div>
+              <div class="activity-content">
+                <div class="title">Propuesta enviada a Greenline</div>
+                <div class="sub">Sponsor transversal · $24.9K total · 5 eventos</div>
+                <div class="time">27 mayo · 3:15 PM · por Bego</div>
+                <div class="tag">Propuesta enviada</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:#DBEAFE;font-size:16px">📞</div>
+              <div class="activity-content">
+                <div class="title">Llamada con CSTI Corp</div>
+                <div class="sub">Innovation by NASA + Foro IA · $15.8K potencial</div>
+                <div class="time">26 mayo · 11:00 AM · por Bego</div>
+                <div class="tag">En seguimiento</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:#EDE9FE;font-size:16px">🤝</div>
+              <div class="activity-content">
+                <div class="title">Reunión con Credicorp</div>
+                <div class="sub">Innovation by NASA · Propuesta $9.9K–14.9K</div>
+                <div class="time">24 mayo · 4:00 PM · por Bego</div>
+                <div class="tag">Por cerrar</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:#FEF3C7;font-size:16px">✅</div>
+              <div class="activity-content">
+                <div class="title">Deal cerrado: PWC – Foro IA</div>
+                <div class="sub">Sponsor confirmado · $3K</div>
+                <div class="time">22 mayo · por Bego</div>
+                <div class="tag">Cerrado</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:#FEE2E2;font-size:16px">❌</div>
+              <div class="activity-content">
+                <div class="title">Cancelación: Izipay – Conv. Financiero</div>
+                <div class="sub">No continúan para DSS · re-agendar</div>
+                <div class="time">21 mayo · por Bego</div>
+                <div class="tag">Canceló</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:#DCFCE7;font-size:16px">✅</div>
+              <div class="activity-content">
+                <div class="title">Deal cerrado: LaTAM · 4 eventos</div>
+                <div class="sub">DSS + NASA + Foro IA + For-Me · $16K total</div>
+                <div class="time">18 mayo · por Bego</div>
+                <div class="tag">Cerrado</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title"><div class="section-title-left">Tareas Pendientes</div></div>
+        <div class="card" style="padding:8px 16px">
+          <div class="activity-list">
+            <div class="task-item">
+              <div class="task-check" onclick="toggleTask(this)"></div>
+              <div class="task-content" style="flex:1">
+                <div class="title">Reunión con Izipay — 4:30 PM</div>
+                <div class="meta">Conversatorio Financiero DSS · re-enganchar</div>
+              </div>
+              <div class="task-due urgent">Hoy</div>
+            </div>
+            <div class="task-item">
+              <div class="task-check" onclick="toggleTask(this)"></div>
+              <div class="task-content" style="flex:1">
+                <div class="title">Confirmar reunión Vinci Compass</div>
+                <div class="meta">4 JUN · Conv. Financiero DSS</div>
+              </div>
+              <div class="task-due soon">2 días</div>
+            </div>
+            <div class="task-item">
+              <div class="task-check" onclick="toggleTask(this)"></div>
+              <div class="task-content" style="flex:1">
+                <div class="title">Follow-up Credicorp</div>
+                <div class="meta">Innovation by NASA · $9.9–14.9K · por cerrar</div>
+              </div>
+              <div class="task-due soon">3 días</div>
+            </div>
+            <div class="task-item">
+              <div class="task-check" onclick="toggleTask(this)"></div>
+              <div class="task-content" style="flex:1">
+                <div class="title">Enviar propuesta formal a Entel</div>
+                <div class="meta">Foro IA · $7.9K incl. Coffee</div>
+              </div>
+              <div class="task-due soon">4 días</div>
+            </div>
+            <div class="task-item">
+              <div class="task-check" onclick="toggleTask(this)"></div>
+              <div class="task-content" style="flex:1">
+                <div class="title">Confirmar AEF – XIV Congreso Fam.</div>
+                <div class="meta">$11.9K · deal más grande pendiente</div>
+              </div>
+              <div class="task-due ok">1 semana</div>
+            </div>
+            <div class="task-item">
+              <div class="task-check" onclick="toggleTask(this)"></div>
+              <div class="task-content" style="flex:1">
+                <div class="title">Prospectar ESET para NASA</div>
+                <div class="meta">Primer contacto pendiente</div>
+              </div>
+              <div class="task-due ok">Esta semana</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna derecha: forecast + eventos -->
+      <div>
+        <div class="section-title"><div class="section-title-left">Forecast por Evento</div></div>
+        <div class="card" style="padding:16px;margin-bottom:20px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border)">
+            <div style="text-align:center;padding:12px;background:var(--gb);border-radius:12px">
+              <div style="font-size:24px;font-weight:900;color:var(--g)">$41K</div>
+              <div style="font-size:10px;color:var(--g);font-weight:700;margin-top:2px">YA CERRADO</div>
+            </div>
+            <div style="text-align:center;padding:12px;background:var(--yb);border-radius:12px">
+              <div style="font-size:24px;font-weight:900;color:var(--y)">$142K+</div>
+              <div style="font-size:10px;color:var(--y);font-weight:700;margin-top:2px">PIPELINE ACTIVO</div>
+            </div>
+          </div>
+          <div class="forecast-event">
+            <div class="fe-name">Digital Sales Summit</div>
+            <div class="fe-bar-wrap"><div class="fe-bar" style="width:55%"></div></div>
+            <div class="fe-amount">$21.9K</div>
+            <div class="fe-pct">55%</div>
+          </div>
+          <div class="forecast-event">
+            <div class="fe-name">Innovation by NASA</div>
+            <div class="fe-bar-wrap"><div class="fe-bar" style="width:72%"></div></div>
+            <div class="fe-amount">$32.1K</div>
+            <div class="fe-pct">72%</div>
+          </div>
+          <div class="forecast-event">
+            <div class="fe-name">Foro Internacional IA</div>
+            <div class="fe-bar-wrap"><div class="fe-bar" style="width:48%"></div></div>
+            <div class="fe-amount">$28.7K</div>
+            <div class="fe-pct">48%</div>
+          </div>
+          <div class="forecast-event">
+            <div class="fe-name">XIV Congreso Emp. Fam.</div>
+            <div class="fe-bar-wrap"><div class="fe-bar" style="width:35%"></div></div>
+            <div class="fe-amount">$15.1K</div>
+            <div class="fe-pct">35%</div>
+          </div>
+          <div class="forecast-event">
+            <div class="fe-name">Foro For-Me</div>
+            <div class="fe-bar-wrap"><div class="fe-bar" style="width:80%"></div></div>
+            <div class="fe-amount">$7K</div>
+            <div class="fe-pct">80%</div>
+          </div>
+          <div class="forecast-event">
+            <div class="fe-name">Arequipa</div>
+            <div class="fe-bar-wrap"><div class="fe-bar" style="width:30%"></div></div>
+            <div class="fe-amount">$8.9K</div>
+            <div class="fe-pct">30%</div>
+          </div>
+        </div>
+
+        <div class="section-title"><div class="section-title-left">Velocidad del Pipeline</div></div>
+        <div class="card" style="padding:16px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div style="background:#F8FAFD;border-radius:10px;padding:12px;text-align:center">
+              <div style="font-size:22px;font-weight:900;color:var(--navy)">18</div>
+              <div style="font-size:10px;color:var(--muted);font-weight:600;margin-top:2px;text-transform:uppercase;letter-spacing:0.5px">Deals activos</div>
+            </div>
+            <div style="background:#F8FAFD;border-radius:10px;padding:12px;text-align:center">
+              <div style="font-size:22px;font-weight:900;color:var(--orange)">14</div>
+              <div style="font-size:10px;color:var(--muted);font-weight:600;margin-top:2px;text-transform:uppercase;letter-spacing:0.5px">Días prom. cierre</div>
+            </div>
+            <div style="background:#F8FAFD;border-radius:10px;padding:12px;text-align:center">
+              <div style="font-size:22px;font-weight:900;color:var(--g)">67%</div>
+              <div style="font-size:10px;color:var(--muted);font-weight:600;margin-top:2px;text-transform:uppercase;letter-spacing:0.5px">Tasa conversión</div>
+            </div>
+            <div style="background:#F8FAFD;border-radius:10px;padding:12px;text-align:center">
+              <div style="font-size:22px;font-weight:900;color:var(--bl)">$5.8K</div>
+              <div style="font-size:10px;color:var(--muted);font-weight:600;margin-top:2px;text-transform:uppercase;letter-spacing:0.5px">Ticket promedio</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /page-actividades -->
+
+  </div><!-- /main -->
+
+  <div class="footer"><span>ALTAG</span> · Sponsor CRM 2026 · Uso interno · info@altagperu.com</div>
+</div><!-- /app -->
+
+<!-- ══════════════════════════════════════
+     MODAL DEAL DETAIL
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="deal-modal" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-company" id="modal-company">—</div>
+        <div class="modal-event" id="modal-event">—</div>
+      </div>
+      <button class="modal-close" onclick="document.getElementById('deal-modal').classList.remove('open')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-grid">
+        <div class="detail-field"><div class="lbl">Estado</div><div class="val" id="modal-status">—</div></div>
+        <div class="detail-field"><div class="lbl">Monto Deal</div><div class="val" id="modal-amount">—</div></div>
+        <div class="detail-field"><div class="lbl">Evento</div><div class="val" id="modal-ev">—</div></div>
+        <div class="detail-field"><div class="lbl">Conversatorio</div><div class="val" id="modal-conv">—</div></div>
+      </div>
+      <div class="modal-notes" id="modal-notes">Sin notas registradas.</div>
+      <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px">Historial de actividad</div>
+      <div class="modal-timeline" id="modal-timeline"></div>
+      <div class="modal-actions">
+        <button class="action-btn primary">📞 Registrar llamada</button>
+        <button class="action-btn orange">📧 Enviar propuesta</button>
+        <button class="action-btn">📅 Agendar reunión</button>
+        <button class="action-btn">📝 Agregar nota</button>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- FOOTER -->
-<div class="footer">
-  <span>ALTAG</span> · Pipeline de Sponsors 2026 · Uso interno · info@altagperu.com
-</div>
+<script>
+/* ═══════════════════════════════════════
+   CREDENCIALES (hashed SHA-256)
+═══════════════════════════════════════ */
+const USERS = {
+  bego: { hash: null, raw: 'Beg0#Altag2026!', displayName: 'Bego Rey', role: 'admin' },
+  test: { hash: null, raw: 'Sp0ns0r$Test26',  displayName: 'Usuario Test', role: 'viewer' }
+};
 
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+async function doLogin() {
+  const user = document.getElementById('inp-user').value.trim().toLowerCase();
+  const pass = document.getElementById('inp-pass').value;
+  const err  = document.getElementById('login-error');
+
+  if (!USERS[user]) { showError(err); return; }
+
+  const hashed = await sha256(pass);
+  if (!USERS[user].hash) USERS[user].hash = await sha256(USERS[user].raw);
+
+  if (hashed !== USERS[user].hash) { showError(err); return; }
+
+  // Login OK
+  sessionStorage.setItem('altag_user', user);
+  sessionStorage.setItem('altag_name', USERS[user].displayName);
+  err.style.display = 'none';
+  launchApp(user);
+}
+
+function showError(el) {
+  el.style.display = 'block';
+  setTimeout(() => el.style.display = 'none', 3000);
+}
+
+function doLogout() {
+  sessionStorage.removeItem('altag_user');
+  sessionStorage.removeItem('altag_name');
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('inp-user').value = '';
+  document.getElementById('inp-pass').value = '';
+}
+
+function launchApp(user) {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
+  document.getElementById('app').style.flexDirection = 'column';
+  const name = USERS[user].displayName.split(' ')[0];
+  document.getElementById('user-name').textContent = name;
+  document.getElementById('user-avatar').textContent = name[0].toUpperCase();
+  renderKanban();
+  renderSponsorsTable();
+}
+
+// Enter key in login
+document.getElementById('inp-pass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+document.getElementById('inp-user').addEventListener('keydown', e => { if(e.key==='Enter') document.getElementById('inp-pass').focus(); });
+
+// Auto-login if session exists
+window.addEventListener('DOMContentLoaded', () => {
+  const u = sessionStorage.getItem('altag_user');
+  if (u && USERS[u]) launchApp(u);
+});
+
+/* ═══════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════ */
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+/* ═══════════════════════════════════════
+   DATA
+═══════════════════════════════════════ */
+const deals = [
+  // CERRADOS
+  { company:'LaTAM',         event:'DSS',        amount:'$4K',         status:'Cerrado',           conv:'—',                      notes:'Sponsor multi-evento. Deal cerrado en mayo.', date:'18 May' },
+  { company:'Univ. Pacífico',event:'DSS',         amount:'$3K',         status:'Cerrado',           conv:'—',                      notes:'Renovación anual confirmada.',                date:'15 May' },
+  { company:'Pac. Seguros',  event:'DSS',         amount:'$2.5K',       status:'Cerrado',           conv:'Estrategia de Canal',    notes:'Transversal: 5 eventos. $4.98K/evento.',       date:'12 May' },
+  { company:'LaTAM',         event:'NASA',        amount:'$4K',         status:'Cerrado',           conv:'—',                      notes:'Parte del paquete multi-evento.',             date:'18 May' },
+  { company:'LaTAM',         event:'Foro IA',     amount:'$4K',         status:'Cerrado',           conv:'—',                      notes:'Parte del paquete multi-evento.',             date:'18 May' },
+  { company:'Univ. Pacífico',event:'Foro IA',     amount:'$3K',         status:'Cerrado',           conv:'—',                      notes:'Confirmado.',                                date:'15 May' },
+  { company:'PWC',           event:'Foro IA',     amount:'$3K',         status:'Cerrado',           conv:'—',                      notes:'Deal cerrado. Factura pendiente.',            date:'22 May' },
+  { company:'LaTAM',         event:'For-Me',      amount:'$4K',         status:'Cerrado',           conv:'—',                      notes:'Paquete multi-evento LaTAM.',                date:'18 May' },
+  { company:'Univ. Pacífico',event:'For-Me',      amount:'$3K',         status:'Cerrado',           conv:'—',                      notes:'Confirmado.',                                date:'15 May' },
+  // POR CERRAR
+  { company:'Rimac',         event:'NASA',        amount:'$5.9K',       status:'Por Cerrar',        conv:'—',                      notes:'Propuesta enviada. Esperando aprobación área comercial.', date:'20 May' },
+  { company:'Entel',         event:'NASA',        amount:'$4.5K',       status:'Por Cerrar',        conv:'—',                      notes:'Call hecho. Muy interesados. Follow-up el 5/6.',          date:'19 May' },
+  { company:'Credicorp',     event:'NASA',        amount:'$9.9–14.9K',  status:'Por Cerrar',        conv:'—',                      notes:'Reunión 24/5. Evalúan paquete premium. Deciding pronto.', date:'24 May' },
+  // POR CONFIRMAR
+  { company:'Yape',          event:'DSS',         amount:'—',           status:'Por Confirmar',     conv:'Financiero',             notes:'Interesados pero esperan aprobación interna.',  date:'—' },
+  { company:'KasNet',        event:'DSS',         amount:'$2.5K',       status:'Por Confirmar',     conv:'Financiero',             notes:'Pendiente firma de contrato.',                  date:'—' },
+  { company:'Aje Group',     event:'DSS',         amount:'$2.5K',       status:'Por Confirmar',     conv:'Estrategia Canal',       notes:'Quieren Historia de Éxito también.',           date:'—' },
+  { company:'Rebaza',        event:'DSS',         amount:'$2.5K',       status:'Por Confirmar',     conv:'Retos IA',               notes:'Propuesta enviada. Sin respuesta aún.',        date:'—' },
+  { company:'Softek',        event:'DSS',         amount:'$3.4K',       status:'Por Confirmar',     conv:'Estrategia Canal',       notes:'Reunión interna pendiente de su parte.',       date:'—' },
+  { company:'SIP',           event:'DSS',         amount:'$4.5K',       status:'Por Confirmar',     conv:'Financiero',             notes:'Evaluando propuesta.',                        date:'—' },
+  { company:'CSTI Corp',     event:'NASA',        amount:'$7.9K',       status:'Por Confirmar',     conv:'—',                      notes:'Propuesta enviada. También interesados en Foro IA.', date:'26 May' },
+  { company:'AEF',           event:'Congreso',    amount:'$11.9K',      status:'Por Confirmar',     conv:'—',                      notes:'Mayor deal del congreso. Decisión esta semana.',date:'—' },
+  { company:'Seidor',        event:'Congreso',    amount:'$3.2K',       status:'Por Confirmar',     conv:'—',                      notes:'En revisión contractual.',                    date:'—' },
+  { company:'Entel',         event:'Foro IA',     amount:'$7.9K',       status:'Por Confirmar',     conv:'—',                      notes:'Incl. Coffee Break. Propuesta aprobada verbalmente.', date:'—' },
+  { company:'CSTI Corp',     event:'Foro IA',     amount:'$7.9K',       status:'Por Confirmar',     conv:'—',                      notes:'Parte del deal doble con NASA.',              date:'26 May' },
+  { company:'UCSP',          event:'Arequipa',    amount:'$5.9K',       status:'Por Confirmar',     conv:'—',                      notes:'Universidad. Esperando presupuesto aprobado.', date:'—' },
+  { company:'Buk',           event:'Arequipa',    amount:'$3K',         status:'Por Confirmar',     conv:'—',                      notes:'Interesados. Reunión en agenda.',             date:'—' },
+  { company:'Vinci Compass', event:'Congreso',    amount:'—',           status:'Por Confirmar',     conv:'Financiero',             notes:'Reunión 4/6 a las 4:30 PM.',                 date:'—' },
+  { company:'Natura',        event:'For-Me',      amount:'—',           status:'Por Confirmar',     conv:'—',                      notes:'Quieren participar pero no tienen presupuesto aún.', date:'—' },
+  // EN CONVERSACIÓN
+  { company:'McCann',        event:'DSS',         amount:'—',           status:'En Conversación',   conv:'Estrategia Canal',       notes:'Conversación inicial. Interés medio.', date:'—' },
+  { company:'Natura',        event:'DSS',         amount:'—',           status:'En Conversación',   conv:'Historia de éxito',      notes:'Quieren historia de éxito, sin monto definido.', date:'—' },
+  { company:'Rextie',        event:'DSS',         amount:'—',           status:'En Conversación',   conv:'—',                      notes:'Confirmados conversatorio. Cerrando monto.', date:'—' },
+  { company:'KSE',           event:'Foro IA',     amount:'—',           status:'En Conversación',   conv:'—',                      notes:'Primer contacto positivo.', date:'—' },
+  // REUNIÓN AGENDADA
+  { company:'La Positiva',   event:'DSS',         amount:'—',           status:'Reunión Agendada',  conv:'—',                      notes:'Prospectar también para NASA.', date:'—' },
+  { company:'EpicTravel',    event:'Foro IA',     amount:'—',           status:'Reunión Agendada',  conv:'—',                      notes:'Primera reunión.', date:'—' },
+  { company:'Univ. Continental',event:'NASA',     amount:'—',           status:'Reunión Agendada',  conv:'—',                      notes:'Reunión 4/6 · 11:00 AM.', date:'4 Jun' },
+  // EN PROSPECCIÓN
+  { company:'ESET',          event:'NASA',        amount:'—',           status:'En Prospección',    conv:'—',                      notes:'Contacto inicial pendiente.', date:'—' },
+  // CANCELÓ
+  { company:'Izipay',        event:'DSS',         amount:'—',           status:'Canceló',           conv:'Financiero',             notes:'Cancelaron. Re-agendar reunión para re-enganchar. Hoy 4:30 PM.', date:'28 May' },
+  { company:'Diner Club',    event:'DSS',         amount:'—',           status:'Canceló',           conv:'Financiero',             notes:'No continúan esta temporada.', date:'—' },
+];
+
+const statusOrder = ['Cerrado','Por Cerrar','Por Confirmar','En Conversación','Reunión Agendada','En Prospección','Canceló'];
+const statusColors = {
+  'Cerrado':         { bg:'var(--gb)',  fg:'var(--g)',  badge:'b-close' },
+  'Por Cerrar':      { bg:'var(--pb)',  fg:'var(--p)',  badge:'b-cerr'  },
+  'Por Confirmar':   { bg:'var(--yb)',  fg:'var(--y)',  badge:'b-pend'  },
+  'En Conversación': { bg:'var(--bb)',  fg:'var(--bl)', badge:'b-conv'  },
+  'Reunión Agendada':{ bg:'var(--cb)',  fg:'var(--c)',  badge:'b-reun'  },
+  'En Prospección':  { bg:'var(--grb)', fg:'var(--gr)', badge:'b-pros'  },
+  'Canceló':         { bg:'var(--rb)',  fg:'var(--r)',  badge:'b-canc'  },
+};
+
+/* ═══════════════════════════════════════
+   KANBAN
+═══════════════════════════════════════ */
+function renderKanban(filterEvent='') {
+  const cols = {
+    'Cerrado':[],'Por Cerrar':[],'Por Confirmar':[],
+    'En Conversación':[],'Reunión Agendada':[],'En Prospección':[]
+  };
+  deals.filter(d => d.status !== 'Canceló' && (!filterEvent || d.event === filterEvent))
+       .forEach(d => { if(cols[d.status]) cols[d.status].push(d); });
+
+  const board = document.getElementById('kanban-board');
+  board.innerHTML = '';
+  const icons = {'Cerrado':'✅','Por Cerrar':'🔐','Por Confirmar':'⏳','En Conversación':'💬','Reunión Agendada':'📅','En Prospección':'🔍'};
+  const colors = {'Cerrado':'var(--g)','Por Cerrar':'var(--p)','Por Confirmar':'var(--y)','En Conversación':'var(--bl)','Reunión Agendada':'var(--c)','En Prospección':'var(--gr)'};
+
+  Object.entries(cols).forEach(([stage, stagDeals]) => {
+    const col = document.createElement('div');
+    col.className = 'kanban-col';
+    col.innerHTML = `
+      <div class="kanban-col-header">
+        <div class="kanban-col-title" style="color:${colors[stage]}">${icons[stage]} ${stage}</div>
+        <div class="kanban-count">${stagDeals.length}</div>
+      </div>
+      ${stagDeals.map((d,i) => `
+        <div class="kanban-card" onclick="openModal(${deals.indexOf(d)})">
+          <div class="kc-company">${d.company}</div>
+          <div class="kc-event">${d.event}</div>
+          <div class="kc-amount">
+            ${d.amount !== '—' ? d.amount : '<span class="na">Monto TBD</span>'}
+          </div>
+          ${d.conv !== '—' ? `<div class="kc-tags"><div class="kc-tag" style="background:var(--bb);color:var(--bl)">${d.conv}</div></div>` : ''}
+          <div class="kc-footer">
+            <div class="kc-date">${d.date !== '—' ? d.date : '—'}</div>
+            <div class="kc-avatar">B</div>
+          </div>
+        </div>`).join('')}`;
+    board.appendChild(col);
+  });
+}
+
+function filterKanban(val) { renderKanban(val); }
+
+/* ═══════════════════════════════════════
+   SPONSORS TABLE
+═══════════════════════════════════════ */
+function renderSponsorsTable(filterText='', filterSt='') {
+  const tbody = document.getElementById('sponsors-tbody');
+  const filtered = deals.filter(d => {
+    const txt = (d.company+d.event+d.conv+d.notes).toLowerCase();
+    return (!filterText || txt.includes(filterText.toLowerCase()))
+        && (!filterSt || d.status === filterSt);
+  });
+  tbody.innerHTML = filtered.map(d => {
+    const sc = statusColors[d.status] || {};
+    const initials = d.company.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+    return `<tr onclick="openModal(${deals.indexOf(d)})">
+      <td><div class="company-cell">
+        <div class="company-icon">${initials}</div>
+        <div><div class="company-name">${d.company}</div><div class="company-contact">info@${d.company.toLowerCase().replace(/[^a-z]/g,'')}.com</div></div>
+      </div></td>
+      <td>${d.event}</td>
+      <td><strong>${d.amount}</strong></td>
+      <td><span class="badge ${sc.badge||''}">${d.status}</span></td>
+      <td style="font-size:11px;color:var(--muted)">${d.notes.split('.')[0]}</td>
+      <td style="font-size:11px;color:var(--muted)">${d.date}</td>
+    </tr>`;
+  }).join('');
+}
+
+function filterTable(val) { renderSponsorsTable(val); }
+function filterByStatus(val) { renderSponsorsTable('', val); }
+
+/* ═══════════════════════════════════════
+   MODAL
+═══════════════════════════════════════ */
+const timelines = {
+  'Cerrado':         [['✅','Deal cerrado'],['📧','Contrato firmado'],['🤝','Reunión de cierre'],['📞','Negociación']],
+  'Por Cerrar':      [['📞','Follow-up realizado'],['📧','Propuesta enviada'],['🤝','Reunión inicial']],
+  'Por Confirmar':   [['📧','Propuesta enviada'],['📞','Llamada de seguimiento'],['📩','Primer contacto']],
+  'En Conversación': [['💬','Conversación activa'],['📩','Contacto inicial']],
+  'Reunión Agendada':[['📅','Reunión agendada'],['📩','Contacto inicial']],
+  'En Prospección':  [['📩','Identificado como prospecto']],
+  'Canceló':         [['❌','Cancelación confirmada'],['📞','Último contacto']],
+};
+const datesEj = ['27 May','24 May','20 May','15 May','10 May','05 May'];
+
+function openModal(idx) {
+  const d = deals[idx];
+  document.getElementById('modal-company').textContent = d.company;
+  document.getElementById('modal-event').textContent   = d.event + ' · ' + d.conv;
+  document.getElementById('modal-status').innerHTML    = `<span class="badge ${statusColors[d.status]?.badge||''}">${d.status}</span>`;
+  document.getElementById('modal-amount').textContent  = d.amount;
+  document.getElementById('modal-ev').textContent      = d.event;
+  document.getElementById('modal-conv').textContent    = d.conv;
+  document.getElementById('modal-notes').textContent   = d.notes;
+  const tl = timelines[d.status] || [];
+  const tlColors = {'✅':'#DCFCE7','📧':'#DBEAFE','🤝':'#EDE9FE','📞':'#FEF3C7','💬':'#E0F2FE','📅':'#E0F2FE','📩':'#F3F4F6','❌':'#FEE2E2'};
+  document.getElementById('modal-timeline').innerHTML = tl.map((item,i)=>`
+    <div class="tl-item">
+      <div class="tl-dot" style="background:${tlColors[item[0]]||'#F3F4F6'}">${item[0]}</div>
+      <div class="tl-content">
+        <div class="tl-title">${item[1]}</div>
+        <div class="tl-date">${datesEj[i] || '—'} · Bego Rey</div>
+      </div>
+    </div>`).join('');
+  document.getElementById('deal-modal').classList.add('open');
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('deal-modal'))
+    document.getElementById('deal-modal').classList.remove('open');
+}
+
+/* ═══════════════════════════════════════
+   TASKS
+═══════════════════════════════════════ */
+function toggleTask(el) {
+  el.classList.toggle('done');
+  el.innerHTML = el.classList.contains('done') ? '✓' : '';
+  const row = el.closest('.task-item');
+  row.querySelector('.title').style.textDecoration = el.classList.contains('done') ? 'line-through' : 'none';
+  row.querySelector('.title').style.opacity = el.classList.contains('done') ? '0.4' : '1';
+}
+</script>
 </body>
 </html>
